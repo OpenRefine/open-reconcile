@@ -1,0 +1,2 @@
+serviceClass: com.googlecode.openreconcile.client.SynonymManager
+path: D7EAA8491C06E5D3B3A0B261633156FE.gwt.rpc

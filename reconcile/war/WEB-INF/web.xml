@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+              http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5"
+         xmlns="http://java.sun.com/xml/ns/javaee">
+	<description>Open Reconcile</description>
+	<display-name>Open Reconcile</display-name>
+  <!-- Servlet -->
+  <servlet>
+    <servlet-name>reconciliationService</servlet-name>
+    <servlet-class>com.googlecode.openreconcile.server.ReconcileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>reconciliationService</servlet-name>
+    <url-pattern>/reconcile</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ConfigDB</servlet-name>
+    <servlet-class>com.googlecode.openreconcile.server.ConfigDBImpl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ConfigDB</servlet-name>
+    <url-pattern>/reconcile/ConfigDB</url-pattern>
+  </servlet-mapping>  
+ 
+  <servlet>
+    <servlet-name>SynonymManager</servlet-name>
+    <servlet-class>com.googlecode.openreconcile.server.SynonymManagerImpl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SynonymManager</servlet-name>
+    <url-pattern>/reconcile/SynonymManager</url-pattern>
+  </servlet-mapping>  
+  <!-- Default page to serve -->
+  <welcome-file-list>
+    <welcome-file>Reconcile.html</welcome-file>
+  </welcome-file-list>
+
+</web-app>

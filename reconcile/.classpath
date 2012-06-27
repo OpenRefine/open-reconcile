@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="/Users/lawlerr1/Documents/workspace/reconcile/src"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="test-classes" path="test"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="com.soyatec.uml.CONTAINER"/>
+	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/Rebecca/Downloads/classes12.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Rebecca/Downloads/sqlitejdbc-v056.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Rebecca/Downloads/postgresql-9.1-902.jdbc3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Rebecca/Downloads/gwtchismes-0.9.7.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Rebecca/Downloads/gson-2.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Rebecca/Downloads/commons-lang-2.6/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Rebecca/Downloads/commons-lang3-3.1/commons-lang3-3.1.jar"/>
+	<classpathentry kind="output" path="war/WEB-INF/classes"/>
+</classpath>
