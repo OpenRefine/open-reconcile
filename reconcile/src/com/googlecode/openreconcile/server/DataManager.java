@@ -16,11 +16,15 @@ public class DataManager {
     public List<String> vocab;
     // holds a map of the terms that are synonyms for the type
     public Map<String, String> subMap;
+
     /**
-     * Constructor, it accesses the configuration file and populates the DatabaseData object based on that, and calls a function to populate the vocab list.
+     * Constructor, it accesses the configuration file and populates the
+     * DatabaseData object based on that, and calls a function to populate the
+     * vocab list.
      * 
-	@param  queryType The type from the query string
-     *  
+     * @param queryType
+     *            The type from the query string
+     * 
      **/	
     DataManager(String queryType){
         String[] row = null;
