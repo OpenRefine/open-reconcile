@@ -27,10 +27,6 @@ public final class ReconcileServlet extends HttpServlet{
     private static final String SERVICE_NAME = "Open Reconcile Reconciliation Service";
     public static String DATA_FILE_NAME = "reconcile.sqlite";
 
-    public ReconcileMatching matcher = new ReconcileMatching();
-    public Query myQuery = new Query();
-    public Queries myQueries = new Queries();
-    public Result myResult = new Result();
 
     /**
      * Runs the reconciliation service, parses the request and generates the
@@ -157,7 +153,7 @@ public final class ReconcileServlet extends HttpServlet{
     public List<Result> runQuery(Query query){
 
         List<Result> resultList = new ArrayList<Result>();
-        // Google Refine always sends an intial query without 
+        // Google Refine always sends an initial query without 
         // a type specified. This works with Freebase to allow
         // the database to suggest a type, to reduce the number of
         // choices the user gets. However, there is no suggest 
