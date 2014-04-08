@@ -13,12 +13,7 @@ import java.util.regex.Pattern;
 
 public class ReconcileMatching {
 	
-	public DataManager  mDataManager = null;
-	
-	public List<Result> results = new ArrayList<Result>();
-	
-	public Query thisQuery = new Query();
-	
+
 	// This is a constant for the minimum maximum number of characters not in common in
 	// the last-ditch matching effort, this is not used if the string is longer
 	// instead it is 1/3rd of the characters not matching 
