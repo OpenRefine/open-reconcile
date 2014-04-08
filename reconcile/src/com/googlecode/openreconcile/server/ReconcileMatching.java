@@ -11,6 +11,8 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class ReconcileMatching {
 	
 
@@ -245,7 +247,7 @@ public class ReconcileMatching {
 	    List<Result> fuzzyResults = new ArrayList<Result>();
 	    for (int i = 0; i < myVocab.vocab.size(); i++){
 	        String vocabterm = myVocab.vocab.get(i).trim();
-	        int distance = levenshteinDistance(vocabterm, queryterm);
+	        int distance = StringUtils.getLevenshteinDistance(vocabterm, queryterm);
 	        // subtract the distance that's just the length difference
 	        // to only take into account the character substitution
 	        distance = distance - (Math.abs(vocabterm.length() - queryterm.length()));
@@ -261,66 +263,6 @@ public class ReconcileMatching {
 	    }
 	    return fuzzyResults;
 	}
-
-    /**
-     * This function returns the number that is the minimum of three ints. it is
-     * used by the LevenshteinDistance function
-     * 
-     * @param one
-     *            an integer to be compared to two others
-     * @param two
-     *            an integer to be compared to two others
-     * @param three
-     *            an integer to be compared to two others
-     * 
-     @return The integer of the three which is the smallest
-     * 
-     **/
-    private static int min(int one, int two, int three) {
-        if (two < one) {
-            one = two;
-        }
-        if (three < one) {
-            one = three;
-        }
-        return one;
-    }
-	
-    /**
-     * This function calculates a Levenshtein Distance Matrix and returns a
-     * number for the match value between one vocabulary term and a query term.
-     * It is based off of the pseudocode found at:
-     * http://en.wikipedia.org/wiki/Levenshtein_distance
-     * 
-     * @param vocabTerm
-     *            A string to be compared to the second string
-     * @param queryTerm
-     *            A second string to be compared to the first string
-     * 
-     @return The distance score for the two strings
-     * 
-     **/		
-    private static int levenshteinDistance(String vocabTerm, String queryTerm) {
-        int dMatrix[][] = new int[vocabTerm.length() + 1][queryTerm.length() + 1];
-
-        for (int i = 0; i < vocabTerm.length() + 1; i++) {
-            dMatrix[i][0] = i;
-        }
-        for (int i = 0; i < queryTerm.length() + 1; i++) {
-            dMatrix[0][i] = i;
-        }
-        for (int i = 1; i < queryTerm.length() + 1; i++) {
-            for (int j = 1; j < vocabTerm.length() + 1; j++) {
-                if (vocabTerm.charAt(j - 1) == queryTerm.charAt(i - 1)) {
-                    dMatrix[j][i] = dMatrix[j - 1][i - 1];
-                } else {
-                    dMatrix[j][i] = min(dMatrix[j - 1][i - 1],
-                            dMatrix[j][i - 1], dMatrix[j - 1][i]) + 1;
-                }
-            }
-        }
-        return dMatrix[vocabTerm.length()][queryTerm.length()];
-    }
 
 
     /**
