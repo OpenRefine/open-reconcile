@@ -6,14 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.googlecode.openreconcile.common.DatabaseData;
-import com.googlecode.openreconcile.common.SynonymData;
 
 public class DataManager {
 
     // holds the database connection information
     public DatabaseData myData;
 
-    public SynonymData mySynonyms;
     // holds the collection of terms from the data source
     public List<String> vocab;
     // holds a map of the terms that are synonyms for the type
@@ -47,7 +45,7 @@ public class DataManager {
             if (row[10].equals("true")) {
                 pun = true;
             }
-            myData = new DatabaseData(row[0], row[3], row[2], row[1], row[4], row[5], row[6], row[7], row[8], cap, pun);
+            myData = new DatabaseData("foo", "bar", "foobar", cap, pun);
 
         }
 
@@ -96,7 +94,7 @@ public class DataManager {
      * the end of the constructor and is private.
      **/
     private void getData(){
-        if (myData.source!=null){
+        if (myData!=null){
 
 //            String sqlStatement = myData.getVocabQuery();
 //            Statement stmt = connection.createStatement();

@@ -256,7 +256,7 @@ public class ConfigDBImpl extends RemoteServiceServlet implements ConfigDB{
             if (row[10].equals("true")) {
                 pun = true;
             }
-            thisDatabase = new DatabaseData(row[0], row[3], row[2], row[1], row[4], row[5], row[6], row[7], row[8], cap, pun);		
+            thisDatabase = new DatabaseData("foo","bar","foobar",cap,pun);		
         }
 
         return thisDatabase;
@@ -279,7 +279,7 @@ public class ConfigDBImpl extends RemoteServiceServlet implements ConfigDB{
     public List<String> getPreview(String primaryKey) {
         DatabaseData myData = getDBData(primaryKey);
         List<String> result = new ArrayList<String>();
-        if(myData != null && myData.source!= null){
+        if(myData != null /*&& myData.source!= null*/){
 
             String sqlStatement = myData.getVocabQuery();
 //            Statement stmt = connection.createStatement();
