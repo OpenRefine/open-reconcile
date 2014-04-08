@@ -2,9 +2,8 @@ package com.googlecode.openreconcile.common;
 
 import java.util.List;
 
-import com.google.gwt.user.client.rpc.RemoteService;
 
-public interface ConfigDB extends RemoteService {
+public interface ConfigDB {
     /**
      * Gets a list of accessible tables in the database.
      * 

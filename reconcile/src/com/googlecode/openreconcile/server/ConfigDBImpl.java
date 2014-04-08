@@ -7,12 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.googlecode.openreconcile.common.ConfigDB;
 import com.googlecode.openreconcile.common.DatabaseData;
 
 
-public class ConfigDBImpl extends RemoteServiceServlet implements ConfigDB{
+public class ConfigDBImpl implements ConfigDB{
     private static String nameOfLogger = ReconcileMatching.class.getName();
     private static Logger myLogger = Logger.getLogger(nameOfLogger); 
     /**
