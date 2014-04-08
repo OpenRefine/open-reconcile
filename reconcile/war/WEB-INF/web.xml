@@ -16,26 +16,4 @@
     <url-pattern>/reconcile</url-pattern>
   </servlet-mapping>
 
-  <servlet>
-    <servlet-name>ConfigDB</servlet-name>
-    <servlet-class>com.googlecode.openreconcile.server.ConfigDBImpl</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ConfigDB</servlet-name>
-    <url-pattern>/reconcile/ConfigDB</url-pattern>
-  </servlet-mapping>  
- 
-  <servlet>
-    <servlet-name>SynonymManager</servlet-name>
-    <servlet-class>com.googlecode.openreconcile.server.SynonymManagerImpl</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SynonymManager</servlet-name>
-    <url-pattern>/reconcile/SynonymManager</url-pattern>
-  </servlet-mapping>  
-  <!-- Default page to serve -->
-  <welcome-file-list>
-    <welcome-file>Reconcile.html</welcome-file>
-  </welcome-file-list>
-
 </web-app>
