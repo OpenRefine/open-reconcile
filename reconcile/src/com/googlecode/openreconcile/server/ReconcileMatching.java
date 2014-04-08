@@ -133,8 +133,8 @@ public class ReconcileMatching {
 		results = sortByScore(results);
 		for (int i = 0; i< results.size(); i++){
 //			myLogger.log(Level.SEVERE,results.get(i).getScore()+ " is bigger than 100?");
-			if(results.get(i).getScore() > (double)100){
-				results.get(i).setScore((double)100 - (results.get(i).getScore()-(double)100));
+			if(results.get(i).getScore() > 100){
+				results.get(i).setScore(100 - (results.get(i).getScore()-100));
 //				myLogger.log(Level.SEVERE,results.get(i).getScore()+" is bigger than 100! and was set to "+
 //						((double)100 - (results.get(i).getScore()-(double)100)));
 			}
@@ -206,7 +206,7 @@ public class ReconcileMatching {
 				}else{
 					score = ((double)querystr.length()/(double)vocabTerm.length())*100;
 				}
-				if (!myVocab.capsSensitive() && !myVocab.punctSensitive() && score >= (double)100){
+				if (!myVocab.capsSensitive() && !myVocab.punctSensitive() && score >= 100){
 					Result match = new Result(vocabID,myVocab.vocab.get(i),type, 100.0,true);
 					perfectMatch.add(match);
 				}
@@ -214,10 +214,11 @@ public class ReconcileMatching {
 				imperfectResults.add(possibleMatch);
 			}
 		}
-		if (perfectMatch.size()>0)
-			return perfectMatch;
-		else
-			return imperfectResults;
+		if (perfectMatch.size()>0) {
+            return perfectMatch;
+        } else {
+            return imperfectResults;
+        }
 	}
 
 	/**
@@ -232,10 +233,11 @@ public class ReconcileMatching {
 	private static ArrayList<Result> distanceMatching(Query query, DataManager myVocab) {
 		String queryterm = query.getQuery();
 		int maxScore;
-		if (queryterm.length()<9)
-			maxScore= queryterm.length()-THRESHOLD_LEV;
-		else
-			maxScore = queryterm.length()-(queryterm.length()/THRESHOLD_LEV);
+		if (queryterm.length()<9) {
+            maxScore= queryterm.length()-THRESHOLD_LEV;
+        } else {
+            maxScore = queryterm.length()-(queryterm.length()/THRESHOLD_LEV);
+        }
 		ArrayList<Result> fuzzyResults = new ArrayList<Result>();
 		for (int i = 0; i < myVocab.vocab.size(); i++){
 			String vocabterm = myVocab.vocab.get(i).trim();
@@ -245,10 +247,11 @@ public class ReconcileMatching {
 			distance = distance - (Math.abs(vocabterm.length() - queryterm.length()));
 			if (distance < maxScore){
 				double score;
-				if (vocabterm.length() < queryterm.length())
-					score = ((double)(vocabterm.length())/(double)(queryterm.length()+distance))*99;
-				else
-					score = (((double)queryterm.length()/(double)(vocabterm.length()+distance)))*99;
+				if (vocabterm.length() < queryterm.length()) {
+                    score = ((double)(vocabterm.length())/(double)(queryterm.length()+distance))*99;
+                } else {
+                    score = (((double)queryterm.length()/(double)(vocabterm.length()+distance)))*99;
+                }
 				fuzzyResults.add(new Result(query.getType()+"/"+myVocab.vocab.get(i), myVocab.vocab.get(i), query.getType(),score, false));
 			}
 		}
@@ -360,8 +363,9 @@ public class ReconcileMatching {
 				// If the result term is already in the hash map
 				// Compare the scores between the current term and the
 				// one already in the hashmap. Add the highest.
-				if (toDeDup.get(i).getScore() > toDeDup.get(hashm.get(toDeDup.get(i).getName().trim())).getScore())
-					hashm.put(toDeDup.get(i).getName().trim(), i);
+				if (toDeDup.get(i).getScore() > toDeDup.get(hashm.get(toDeDup.get(i).getName().trim())).getScore()) {
+                    hashm.put(toDeDup.get(i).getName().trim(), i);
+                }
 			}
 		}
 		// Go through the hash map and add all of the index's to the 
@@ -389,8 +393,8 @@ public class ReconcileMatching {
 		// split on space and punctuation
 		String[] termList = queryname.split(" ");
 		ArrayList<Result> bagResults = new ArrayList<Result>();
-		for (int i=0; i<termList.length; i++){
-			Query newQuery = new Query(termList[i], query.getLimit(), query.getType(), query.getTypeStrict(), query.properties()) ;
+		for (String element : termList) {
+			Query newQuery = new Query(element, query.getLimit(), query.getType(), query.getTypeStrict(), query.properties()) ;
 			ArrayList<Result> tempResults = new ArrayList<Result>(findMatches(newQuery, myVocab));
 			for(int j=0; j<tempResults.size(); j++){
 

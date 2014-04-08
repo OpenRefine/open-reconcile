@@ -243,10 +243,12 @@ public class ConfigDBImpl extends RemoteServiceServlet implements ConfigDB{
 	    boolean cap=false;
 	    boolean pun = false;
 	    if(row!=null && row.length>1){
-		    if (row[9].equals("true"))
-		    	cap = true;
-		    if (row[10].equals("true"))
-		    	pun = true;
+		    if (row[9].equals("true")) {
+                cap = true;
+            }
+		    if (row[10].equals("true")) {
+                pun = true;
+            }
 		   thisDatabase = new DatabaseData(row[0], row[3], row[2], row[1], row[4], row[5], row[6], row[7], row[8], cap, pun);		
 	    }
 

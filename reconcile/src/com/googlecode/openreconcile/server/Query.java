@@ -47,8 +47,9 @@ public class Query{
 	 * @return  the string value for the type the term is to be reconciled against
 	 */
 	public String getType(){
-		if (type !=null)
-			return type;
+		if (type !=null) {
+            return type;
+        }
 		return null;
 	}
 	/**

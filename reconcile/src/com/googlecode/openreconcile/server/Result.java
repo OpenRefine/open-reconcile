@@ -45,7 +45,7 @@ public class Result{
 	 *  
 	 */
 	public void decreaseScore(int factor) {
-		score = (score*0.95)/((double)factor);
+		score = (score*0.95)/(factor);
 		if (score > 100){
 			score = (double)99;
 		}

@@ -165,8 +165,8 @@ public final class ReconcileServlet extends HttpServlet{
 		if (query.getType()==null){
 			MetaData md = genMetaData();
 			Library libs[] = md.getLibraries();
-			for( int i = 0; i < libs.length; i++){
-				resultList.add(new Result(libs[i].getID()));
+			for (Library lib : libs) {
+				resultList.add(new Result(lib.getID()));
 			}
 		}else{
 			DataManager vocabManager = new DataManager(query.getType());
