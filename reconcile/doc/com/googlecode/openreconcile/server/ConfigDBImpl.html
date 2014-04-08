@@ -167,7 +167,7 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.util.ArrayList&lt;java.lang.String&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../com/googlecode/openreconcile/server/ConfigDBImpl.html#addEntry(com.googlecode.openreconcile.client.datatypes.DatabaseData)">addEntry</A></B>(<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.client.datatypes">DatabaseData</A>&nbsp;inputs)</CODE>
+<TD><CODE><B><A HREF="../../../../com/googlecode/openreconcile/server/ConfigDBImpl.html#addEntry(com.googlecode.openreconcile.common.DatabaseData)">addEntry</A></B>(<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.common">DatabaseData</A>&nbsp;inputs)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets a list of accessible tables in the database.</TD>
@@ -183,7 +183,7 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>private &nbsp;java.util.ArrayList&lt;java.lang.String&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../com/googlecode/openreconcile/server/ConfigDBImpl.html#executeSQL(com.googlecode.openreconcile.client.datatypes.DatabaseData)">executeSQL</A></B>(<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.client.datatypes">DatabaseData</A>&nbsp;inputs)</CODE>
+<TD><CODE><B><A HREF="../../../../com/googlecode/openreconcile/server/ConfigDBImpl.html#executeSQL(com.googlecode.openreconcile.common.DatabaseData)">executeSQL</A></B>(<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.common">DatabaseData</A>&nbsp;inputs)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Executes the SQL queries based on what is in the DatabaseData object handed to it
@@ -193,7 +193,7 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.util.ArrayList&lt;java.lang.String&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../com/googlecode/openreconcile/server/ConfigDBImpl.html#getColumns(com.googlecode.openreconcile.client.datatypes.DatabaseData)">getColumns</A></B>(<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.client.datatypes">DatabaseData</A>&nbsp;inputs)</CODE>
+<TD><CODE><B><A HREF="../../../../com/googlecode/openreconcile/server/ConfigDBImpl.html#getColumns(com.googlecode.openreconcile.common.DatabaseData)">getColumns</A></B>(<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.common">DatabaseData</A>&nbsp;inputs)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Calls the executeSQL function, see executeSQL</TD>
@@ -208,7 +208,7 @@ java.lang.Object
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.client.datatypes">DatabaseData</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.common">DatabaseData</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../com/googlecode/openreconcile/server/ConfigDBImpl.html#getDBData(java.lang.String)">getDBData</A></B>(java.lang.String&nbsp;primaryKey)</CODE>
 
 <BR>
@@ -225,7 +225,7 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;java.util.ArrayList&lt;java.lang.String&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../com/googlecode/openreconcile/server/ConfigDBImpl.html#getTables(com.googlecode.openreconcile.client.datatypes.DatabaseData)">getTables</A></B>(<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.client.datatypes">DatabaseData</A>&nbsp;inputs)</CODE>
+<TD><CODE><B><A HREF="../../../../com/googlecode/openreconcile/server/ConfigDBImpl.html#getTables(com.googlecode.openreconcile.common.DatabaseData)">getTables</A></B>(<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.common">DatabaseData</A>&nbsp;inputs)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Calls the executeSQL function, see executeSQL</TD>
@@ -327,10 +327,10 @@ public <B>ConfigDBImpl</B>()</PRE>
 </TR>
 </TABLE>
 
-<A NAME="executeSQL(com.googlecode.openreconcile.client.datatypes.DatabaseData)"><!-- --></A><H3>
+<A NAME="executeSQL(com.googlecode.openreconcile.common.DatabaseData)"><!-- --></A><H3>
 executeSQL</H3>
 <PRE>
-private java.util.ArrayList&lt;java.lang.String&gt; <B>executeSQL</B>(<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.client.datatypes">DatabaseData</A>&nbsp;inputs)</PRE>
+private java.util.ArrayList&lt;java.lang.String&gt; <B>executeSQL</B>(<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.common">DatabaseData</A>&nbsp;inputs)</PRE>
 <DL>
 <DD>Executes the SQL queries based on what is in the DatabaseData object handed to it
  if there is a table name specified, it will search for column names of that table,
@@ -349,15 +349,15 @@ private java.util.ArrayList&lt;java.lang.String&gt; <B>executeSQL</B>(<A HREF=".
 </DL>
 <HR>
 
-<A NAME="getTables(com.googlecode.openreconcile.client.datatypes.DatabaseData)"><!-- --></A><H3>
+<A NAME="getTables(com.googlecode.openreconcile.common.DatabaseData)"><!-- --></A><H3>
 getTables</H3>
 <PRE>
-public java.util.ArrayList&lt;java.lang.String&gt; <B>getTables</B>(<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.client.datatypes">DatabaseData</A>&nbsp;inputs)</PRE>
+public java.util.ArrayList&lt;java.lang.String&gt; <B>getTables</B>(<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.common">DatabaseData</A>&nbsp;inputs)</PRE>
 <DL>
 <DD>Calls the executeSQL function, see executeSQL
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../com/googlecode/openreconcile/client/ConfigDB.html#getTables(com.googlecode.openreconcile.client.datatypes.DatabaseData)">getTables</A></CODE> in interface <CODE><A HREF="../../../../com/googlecode/openreconcile/client/ConfigDB.html" title="interface in com.googlecode.openreconcile.client">ConfigDB</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../com/googlecode/openreconcile/client/ConfigDB.html#getTables(com.googlecode.openreconcile.common.DatabaseData)">getTables</A></CODE> in interface <CODE><A HREF="../../../../com/googlecode/openreconcile/client/ConfigDB.html" title="interface in com.googlecode.openreconcile.client">ConfigDB</A></CODE></DL>
 </DD>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>inputs</CODE> - A DatabaseData object containing connection information
@@ -366,15 +366,15 @@ public java.util.ArrayList&lt;java.lang.String&gt; <B>getTables</B>(<A HREF="../
 </DL>
 <HR>
 
-<A NAME="getColumns(com.googlecode.openreconcile.client.datatypes.DatabaseData)"><!-- --></A><H3>
+<A NAME="getColumns(com.googlecode.openreconcile.common.DatabaseData)"><!-- --></A><H3>
 getColumns</H3>
 <PRE>
-public java.util.ArrayList&lt;java.lang.String&gt; <B>getColumns</B>(<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.client.datatypes">DatabaseData</A>&nbsp;inputs)</PRE>
+public java.util.ArrayList&lt;java.lang.String&gt; <B>getColumns</B>(<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.common">DatabaseData</A>&nbsp;inputs)</PRE>
 <DL>
 <DD>Calls the executeSQL function, see executeSQL
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../com/googlecode/openreconcile/client/ConfigDB.html#getColumns(com.googlecode.openreconcile.client.datatypes.DatabaseData)">getColumns</A></CODE> in interface <CODE><A HREF="../../../../com/googlecode/openreconcile/client/ConfigDB.html" title="interface in com.googlecode.openreconcile.client">ConfigDB</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../com/googlecode/openreconcile/client/ConfigDB.html#getColumns(com.googlecode.openreconcile.common.DatabaseData)">getColumns</A></CODE> in interface <CODE><A HREF="../../../../com/googlecode/openreconcile/client/ConfigDB.html" title="interface in com.googlecode.openreconcile.client">ConfigDB</A></CODE></DL>
 </DD>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>inputs</CODE> - A DatabaseData object containing connection information
@@ -383,15 +383,15 @@ public java.util.ArrayList&lt;java.lang.String&gt; <B>getColumns</B>(<A HREF="..
 </DL>
 <HR>
 
-<A NAME="addEntry(com.googlecode.openreconcile.client.datatypes.DatabaseData)"><!-- --></A><H3>
+<A NAME="addEntry(com.googlecode.openreconcile.common.DatabaseData)"><!-- --></A><H3>
 addEntry</H3>
 <PRE>
-public java.util.ArrayList&lt;java.lang.String&gt; <B>addEntry</B>(<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.client.datatypes">DatabaseData</A>&nbsp;inputs)</PRE>
+public java.util.ArrayList&lt;java.lang.String&gt; <B>addEntry</B>(<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.common">DatabaseData</A>&nbsp;inputs)</PRE>
 <DL>
 <DD>Gets a list of accessible tables in the database.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../com/googlecode/openreconcile/client/ConfigDB.html#addEntry(com.googlecode.openreconcile.client.datatypes.DatabaseData)">addEntry</A></CODE> in interface <CODE><A HREF="../../../../com/googlecode/openreconcile/client/ConfigDB.html" title="interface in com.googlecode.openreconcile.client">ConfigDB</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../com/googlecode/openreconcile/client/ConfigDB.html#addEntry(com.googlecode.openreconcile.common.DatabaseData)">addEntry</A></CODE> in interface <CODE><A HREF="../../../../com/googlecode/openreconcile/client/ConfigDB.html" title="interface in com.googlecode.openreconcile.client">ConfigDB</A></CODE></DL>
 </DD>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>inputs</CODE> - A DatabaseData object containing information to be added to the configuration file.
@@ -442,7 +442,7 @@ public java.util.ArrayList&lt;java.lang.String&gt; <B>deleteThisEntry</B>(java.l
 <A NAME="getDBData(java.lang.String)"><!-- --></A><H3>
 getDBData</H3>
 <PRE>
-public <A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.client.datatypes">DatabaseData</A> <B>getDBData</B>(java.lang.String&nbsp;primaryKey)</PRE>
+public <A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.common">DatabaseData</A> <B>getDBData</B>(java.lang.String&nbsp;primaryKey)</PRE>
 <DL>
 <DD>Returns the DatabaseData object for a type
 <P>

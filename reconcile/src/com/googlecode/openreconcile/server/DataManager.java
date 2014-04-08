@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.googlecode.openreconcile.client.datatypes.DatabaseData;
-import com.googlecode.openreconcile.client.datatypes.SynonymData;
+import com.googlecode.openreconcile.common.DatabaseData;
+import com.googlecode.openreconcile.common.SynonymData;
 
 public class DataManager {
 

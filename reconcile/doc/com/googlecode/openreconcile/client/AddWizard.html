@@ -165,7 +165,7 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected static&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../com/googlecode/openreconcile/client/AddWizard.html#addData(com.googlecode.openreconcile.client.datatypes.DatabaseData)">addData</A></B>(<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.client.datatypes">DatabaseData</A>&nbsp;inputs)</CODE>
+<TD><CODE><B><A HREF="../../../../com/googlecode/openreconcile/client/AddWizard.html#addData(com.googlecode.openreconcile.common.DatabaseData)">addData</A></B>(<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.common">DatabaseData</A>&nbsp;inputs)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds a database reference to the configuration file.</TD>
@@ -173,7 +173,7 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../com/googlecode/openreconcile/client/AddWizard.html#doWizard(com.googlecode.openreconcile.client.datatypes.DatabaseData)">doWizard</A></B>(<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.client.datatypes">DatabaseData</A>&nbsp;myData)</CODE>
+<TD><CODE><B><A HREF="../../../../com/googlecode/openreconcile/client/AddWizard.html#doWizard(com.googlecode.openreconcile.common.DatabaseData)">doWizard</A></B>(<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.common">DatabaseData</A>&nbsp;myData)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates dialog box to ask for more data.</TD>
@@ -181,7 +181,7 @@ java.lang.Object
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>private static&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../com/googlecode/openreconcile/client/AddWizard.html#finishWizard(com.googlecode.openreconcile.client.datatypes.DatabaseData)">finishWizard</A></B>(<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.client.datatypes">DatabaseData</A>&nbsp;data)</CODE>
+<TD><CODE><B><A HREF="../../../../com/googlecode/openreconcile/client/AddWizard.html#finishWizard(com.googlecode.openreconcile.common.DatabaseData)">finishWizard</A></B>(<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.common">DatabaseData</A>&nbsp;data)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Finishes collecting information for user and sends a request to add the
@@ -266,10 +266,10 @@ public <B>AddWizard</B>()</PRE>
 </TR>
 </TABLE>
 
-<A NAME="doWizard(com.googlecode.openreconcile.client.datatypes.DatabaseData)"><!-- --></A><H3>
+<A NAME="doWizard(com.googlecode.openreconcile.common.DatabaseData)"><!-- --></A><H3>
 doWizard</H3>
 <PRE>
-public static void <B>doWizard</B>(<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.client.datatypes">DatabaseData</A>&nbsp;myData)</PRE>
+public static void <B>doWizard</B>(<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.common">DatabaseData</A>&nbsp;myData)</PRE>
 <DL>
 <DD>Creates dialog box to ask for more data. It calls finishWizard for 
  the last data collection and to call the service to add the data to
@@ -281,10 +281,10 @@ public static void <B>doWizard</B>(<A HREF="../../../../com/googlecode/openrecon
 </DL>
 <HR>
 
-<A NAME="finishWizard(com.googlecode.openreconcile.client.datatypes.DatabaseData)"><!-- --></A><H3>
+<A NAME="finishWizard(com.googlecode.openreconcile.common.DatabaseData)"><!-- --></A><H3>
 finishWizard</H3>
 <PRE>
-private static void <B>finishWizard</B>(<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.client.datatypes">DatabaseData</A>&nbsp;data)</PRE>
+private static void <B>finishWizard</B>(<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.common">DatabaseData</A>&nbsp;data)</PRE>
 <DL>
 <DD>Finishes collecting information for user and sends a request to add the
  references to the configuration file. It is split out of the doWizard
@@ -296,10 +296,10 @@ private static void <B>finishWizard</B>(<A HREF="../../../../com/googlecode/open
 </DL>
 <HR>
 
-<A NAME="addData(com.googlecode.openreconcile.client.datatypes.DatabaseData)"><!-- --></A><H3>
+<A NAME="addData(com.googlecode.openreconcile.common.DatabaseData)"><!-- --></A><H3>
 addData</H3>
 <PRE>
-protected static void <B>addData</B>(<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.client.datatypes">DatabaseData</A>&nbsp;inputs)</PRE>
+protected static void <B>addData</B>(<A HREF="../../../../com/googlecode/openreconcile/client/datatypes/DatabaseData.html" title="class in com.googlecode.openreconcile.common">DatabaseData</A>&nbsp;inputs)</PRE>
 <DL>
 <DD>Adds a database reference to the configuration file. It is called
  When the "Select Database" is clicked and all of the input is properly

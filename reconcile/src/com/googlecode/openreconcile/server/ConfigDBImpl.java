@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import com.googlecode.openreconcile.client.ConfigDB;
-import com.googlecode.openreconcile.client.datatypes.DatabaseData;
+import com.googlecode.openreconcile.common.ConfigDB;
+import com.googlecode.openreconcile.common.DatabaseData;
 
 
 public class ConfigDBImpl extends RemoteServiceServlet implements ConfigDB{

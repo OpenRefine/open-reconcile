@@ -20,7 +20,11 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.googlecode.openreconcile.client.datatypes.SynonymData;
+import com.googlecode.openreconcile.common.ConfigDB;
+import com.googlecode.openreconcile.common.ConfigDBAsync;
+import com.googlecode.openreconcile.common.SynonymData;
+import com.googlecode.openreconcile.common.SynonymManager;
+import com.googlecode.openreconcile.common.SynonymManagerAsync;
 
 public class SynonymTable extends Composite{
 	private final static ConfigDBAsync svcDatabase = GWT.create(ConfigDB.class);

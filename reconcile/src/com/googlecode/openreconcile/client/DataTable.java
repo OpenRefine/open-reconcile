@@ -20,6 +20,8 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.googlecode.openreconcile.common.ConfigDB;
+import com.googlecode.openreconcile.common.ConfigDBAsync;
 
 @SuppressWarnings("deprecation")
 public class DataTable extends Composite{

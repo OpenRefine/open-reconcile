@@ -14,7 +14,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
-import com.googlecode.openreconcile.client.datatypes.DatabaseData;
+import com.googlecode.openreconcile.common.DatabaseData;
 
 public class AddTable extends Composite {
 	// These Labels and Boxes are declared as class variables because

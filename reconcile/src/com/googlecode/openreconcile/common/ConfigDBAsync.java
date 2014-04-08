@@ -1,7 +1,6 @@
-package com.googlecode.openreconcile.client;
+package com.googlecode.openreconcile.common;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.googlecode.openreconcile.client.datatypes.DatabaseData;
 // See ConfigDB.java for javadoc information about these methods
 public interface ConfigDBAsync {
 	public void getTables (DatabaseData inputs, @SuppressWarnings("rawtypes") AsyncCallback callback);

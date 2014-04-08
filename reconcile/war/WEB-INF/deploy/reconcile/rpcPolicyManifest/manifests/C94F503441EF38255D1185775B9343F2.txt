@@ -1,2 +1,2 @@
-serviceClass: com.googlecode.openreconcile.client.ConfigDB
+serviceClass: com.googlecode.openreconcile.common.ConfigDB
 path: 6533A3E18A3901478DA720485BE0E92E.gwt.rpc

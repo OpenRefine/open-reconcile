@@ -1,4 +1,4 @@
-package com.googlecode.openreconcile.client.datatypes;
+package com.googlecode.openreconcile.common;
 
 import java.io.Serializable;
 

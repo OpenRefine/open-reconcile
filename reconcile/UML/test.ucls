@@ -1,6 +1,6 @@
 <class-diagram version="1.0.8" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true">  
-  <interface id="1" corner="BOTTOM_RIGHT" language="java" name="com.googlecode.openreconcile.client.ConfigDBAsync" 
+  <interface id="1" corner="BOTTOM_RIGHT" language="java" name="com.googlecode.openreconcile.common.ConfigDBAsync" 
     project="reconcile" file="/reconcile/src/com/googlecode/openreconcile/client/ConfigDBAsync.java" binary="false">    
     <position height="-1" width="-1" x="1307" y="906"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
@@ -24,7 +24,7 @@
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <interface id="4" corner="BOTTOM_RIGHT" language="java" name="com.googlecode.openreconcile.client.ConfigDB" 
+  <interface id="4" corner="BOTTOM_RIGHT" language="java" name="com.googlecode.openreconcile.common.ConfigDB" 
     project="reconcile" file="/reconcile/src/com/googlecode/openreconcile/client/ConfigDB.java" binary="false">    
     <position height="162" width="274" x="491" y="73"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
@@ -32,7 +32,7 @@
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </interface>  
-  <interface id="5" corner="BOTTOM_RIGHT" language="java" name="com.googlecode.openreconcile.client.SynonymManager" 
+  <interface id="5" corner="BOTTOM_RIGHT" language="java" name="com.googlecode.openreconcile.common.SynonymManager" 
     project="reconcile" file="/reconcile/src/com/googlecode/openreconcile/client/SynonymManager.java" binary="false">    
     <position height="111" width="255" x="805" y="73"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
@@ -56,7 +56,7 @@
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="8" corner="BOTTOM_RIGHT" language="java" name="com.googlecode.openreconcile.client.datatypes.SynonymData" 
+  <class id="8" corner="BOTTOM_RIGHT" language="java" name="com.googlecode.openreconcile.common.SynonymData" 
     project="reconcile" file="/reconcile/src/com/googlecode/openreconcile/client/datatypes/SynonymData.java" 
     binary="false">    
     <position height="264" width="229" x="775" y="630"/>    
@@ -74,7 +74,7 @@
     </display>  
   </class>  
   <interface id="10" corner="BOTTOM_RIGHT" language="java" 
-    name="com.googlecode.openreconcile.client.SynonymManagerAsync" project="reconcile" 
+    name="com.googlecode.openreconcile.common.SynonymManagerAsync" project="reconcile" 
     file="/reconcile/src/com/googlecode/openreconcile/client/SynonymManagerAsync.java" binary="false">    
     <position height="111" width="268" x="1044" y="630"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
@@ -98,7 +98,7 @@
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="13" corner="BOTTOM_RIGHT" language="java" name="com.googlecode.openreconcile.client.datatypes.DatabaseData" 
+  <class id="13" corner="BOTTOM_RIGHT" language="java" name="com.googlecode.openreconcile.common.DatabaseData" 
     project="reconcile" file="/reconcile/src/com/googlecode/openreconcile/client/datatypes/DatabaseData.java" 
     binary="false">    
     <position height="502" width="519" x="491" y="934"/>    

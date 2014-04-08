@@ -1,9 +1,8 @@
-package com.googlecode.openreconcile.client;
+package com.googlecode.openreconcile.common;
 
 import java.util.List;
 
 import com.google.gwt.user.client.rpc.RemoteService;
-import com.googlecode.openreconcile.client.datatypes.SynonymData;
 
 public interface SynonymManager extends RemoteService {
 	/**

@@ -1,7 +1,6 @@
-package com.googlecode.openreconcile.client;
+package com.googlecode.openreconcile.common;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.googlecode.openreconcile.client.datatypes.SynonymData;
 
 public interface SynonymManagerAsync {
 	// See SynonymManager for java doc info

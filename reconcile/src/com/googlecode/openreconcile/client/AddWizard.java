@@ -23,7 +23,9 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.googlecode.openreconcile.client.datatypes.DatabaseData;
+import com.googlecode.openreconcile.common.ConfigDB;
+import com.googlecode.openreconcile.common.ConfigDBAsync;
+import com.googlecode.openreconcile.common.DatabaseData;
 
 public class AddWizard {
 	

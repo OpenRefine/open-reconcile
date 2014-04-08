@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import com.googlecode.openreconcile.client.SynonymManager;
-import com.googlecode.openreconcile.client.datatypes.SynonymData;
+import com.googlecode.openreconcile.common.SynonymData;
+import com.googlecode.openreconcile.common.SynonymManager;
 
 public class SynonymManagerImpl extends RemoteServiceServlet implements SynonymManager{
 	/**
