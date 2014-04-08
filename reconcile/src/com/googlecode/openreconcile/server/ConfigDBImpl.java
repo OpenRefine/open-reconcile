@@ -1,11 +1,8 @@
 package com.googlecode.openreconcile.server;
 
 
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import com.googlecode.openreconcile.client.ConfigDB;
-import com.googlecode.openreconcile.client.datatypes.DatabaseData;
-import com.googlecode.openreconcile.client.datatypes.SynonymData;
-
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -13,7 +10,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import java.io.*;
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.googlecode.openreconcile.client.ConfigDB;
+import com.googlecode.openreconcile.client.datatypes.DatabaseData;
 
 // uncomment for logging.
 //import java.util.logging.Level;
