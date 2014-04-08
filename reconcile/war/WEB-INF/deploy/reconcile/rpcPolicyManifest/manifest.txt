@@ -1,4 +1,0 @@
-# Module reconcile
-# RPC service class, partial path of RPC policy file
-com.googlecode.openreconcile.common.SynonymManager, D7EAA8491C06E5D3B3A0B261633156FE.gwt.rpc
-com.googlecode.openreconcile.common.ConfigDB, 6533A3E18A3901478DA720485BE0E92E.gwt.rpc
