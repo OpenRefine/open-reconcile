@@ -20,8 +20,6 @@ public class SynonymManagerImpl extends RemoteServiceServlet implements
 
     private static final long serialVersionUID = -145830448759156312L;
 
-    public static String DATA_FILE = DataStoreFile.DATA_FILE_NAME;
-
     /**
      * Gets a list of accessible tables in the database.
      * 
@@ -36,7 +34,7 @@ public class SynonymManagerImpl extends RemoteServiceServlet implements
      * 
      */
     public List<String> addEntry(SynonymData inputs) {
-        File file = new File(DataStoreFile.DATA_FILE_NAME);
+        File file = new File(ReconcileServlet.DATA_FILE_NAME);
         List<String> result = new ArrayList<String>();
         // If the file doesn't exist, create it.
         if (!file.exists()) {
@@ -106,7 +104,7 @@ public class SynonymManagerImpl extends RemoteServiceServlet implements
      */
     @Override
     public List<String[]> getCurrent(String type) {
-        File file = new File(DataStoreFile.DATA_FILE_NAME);
+        File file = new File(ReconcileServlet.DATA_FILE_NAME);
         List<String[]> result = new ArrayList<String[]>();
         if (!file.exists()) {
             result = null;
@@ -145,7 +143,7 @@ public class SynonymManagerImpl extends RemoteServiceServlet implements
      */
     @Override
     public List<String> deleteEntry(String primaryKey) {
-        File file = new File(DataStoreFile.DATA_FILE_NAME);
+        File file = new File(ReconcileServlet.DATA_FILE_NAME);
         List<String> result = new ArrayList<String>();
         if (!file.exists()) {
             result.add("0");

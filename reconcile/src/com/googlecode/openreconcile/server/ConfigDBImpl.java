@@ -22,7 +22,6 @@ public class ConfigDBImpl extends RemoteServiceServlet implements ConfigDB{
 
     public DatabaseData myData;
 
-    public static String DATA_FILE = DataStoreFile.DATA_FILE_NAME;
 
     /**
      * Executes the SQL queries based on what is in the DatabaseData object
@@ -128,7 +127,7 @@ public class ConfigDBImpl extends RemoteServiceServlet implements ConfigDB{
      */
     @Override
     public List<String> addEntry(DatabaseData inputs) {
-        File file = new File(DataStoreFile.DATA_FILE_NAME);
+        File file = new File(ReconcileServlet.DATA_FILE_NAME);
         List<String> result = new ArrayList<String>();
         // If the file doesn't exist, create it.
         if (!file.exists()){
@@ -174,7 +173,7 @@ public class ConfigDBImpl extends RemoteServiceServlet implements ConfigDB{
      */
     @Override
     public List<String[]> getCurrent() {
-        File file = new File(DataStoreFile.DATA_FILE_NAME);
+        File file = new File(ReconcileServlet.DATA_FILE_NAME);
         List<String[]> result = new ArrayList<String[]>();
         if (!file.exists()){
             result= null;
@@ -210,7 +209,7 @@ public class ConfigDBImpl extends RemoteServiceServlet implements ConfigDB{
      */
     @Override
     public List<String> deleteThisEntry(String primaryKey){
-        File file = new File(DataStoreFile.DATA_FILE_NAME);
+        File file = new File(ReconcileServlet.DATA_FILE_NAME);
         List<String> result = new ArrayList<String>();
         if (!file.exists()){
             result.add("0");

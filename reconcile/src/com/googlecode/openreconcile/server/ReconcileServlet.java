@@ -18,10 +18,14 @@ import com.google.gson.GsonBuilder;
 
 
 public final class ReconcileServlet extends HttpServlet{
+
     /**
      * Generated serial Version ID. 
      */
     private static final long serialVersionUID = 510045970250283364L;
+
+    private static final String SERVICE_NAME = "Open Reconcile Reconciliation Service";
+    public static String DATA_FILE_NAME = "reconcile.sqlite";
 
     public ReconcileMatching matcher = new ReconcileMatching();
     public Query myQuery = new Query();
@@ -108,9 +112,8 @@ public final class ReconcileServlet extends HttpServlet{
      */
     public MetaData genMetaData(){
         List<Library> lib = new ArrayList<Library>();
-        File file = new File(DataStoreFile.DATA_FILE_NAME);
-        // this name can be changed as desired
-        String name = "Open Reconcile Reconciliation Service";
+        File file = new File(DATA_FILE_NAME);
+        String name = SERVICE_NAME;
         if (!file.exists()){
             MetaData md = new MetaData(name,lib);
             return md;
