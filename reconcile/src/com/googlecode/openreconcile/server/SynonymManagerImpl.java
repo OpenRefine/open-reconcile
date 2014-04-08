@@ -1,17 +1,12 @@
 package com.googlecode.openreconcile.server;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.googlecode.openreconcile.client.SynonymManager;
 import com.googlecode.openreconcile.client.datatypes.SynonymData;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-
-import java.io.*;
 
 public class SynonymManagerImpl extends RemoteServiceServlet implements SynonymManager{
 	/**
@@ -67,29 +62,18 @@ public class SynonymManagerImpl extends RemoteServiceServlet implements SynonymM
 		// also don't add entries that won't point to entries in the vocab, because there's really
 		// no point. 
 		if (!inputs.getTo().equals(inputs.getFrom()) && termExists && !fromExists){
-		    try{
-				String driverName = "org.sqlite.JDBC";
-			    Class.forName(driverName);
-			    Connection connection = DriverManager.getConnection("jdbc:sqlite:"+DataStoreFile.DATA_FILE_NAME);
-			    Statement stmt = connection.createStatement();
+
 			    // If the table doesn't exist, create it.
 			    String sqlstat = "create table if not exists SubstitutionTable (pkey INTEGER PRIMARY KEY, fromterm UNIQUE, toterm, type)";
-			    connection.setAutoCommit(true);
-			    stmt.executeUpdate(sqlstat);
-			    stmt.execute(addStat);
-			    stmt.close();
-			    connection.close();
+//			    connection.setAutoCommit(true);
+//			    stmt.executeUpdate(sqlstat);
+//			    stmt.execute(addStat);
+//			    stmt.close();
+//			    connection.close();
 			    
 			    result.add("1");
 			    result.add("Entry Added");
-			} catch (ClassNotFoundException e) {
-				result.add("0");
-				result.add("ClassNotFound");
-			    // Could not find the database driver
-			} catch (SQLException e) {
-				result.add("0");
-				result.add("SQL Exception: "+e.toString()+ " on sql statement "+addStat+ " please note that capitalization matters");
-			}
+
 		}else{
 			result.add("0");
 			if (inputs.getTo().equals(inputs.getFrom())){
@@ -119,33 +103,21 @@ public class SynonymManagerImpl extends RemoteServiceServlet implements SynonymM
 			result= null;
 			return result;
 		}
-	    try{
-			String driverName = "org.sqlite.JDBC";
-		    Class.forName(driverName);
-		    Connection connection = DriverManager.getConnection("jdbc:sqlite:"+DataStoreFile.DATA_FILE_NAME);
-		    Statement stmt = connection.createStatement();
-		    ResultSet rs = stmt.executeQuery("SELECT * FROM SubstitutionTable WHERE type='"+type+"'");
-		    int columnCount = rs.getMetaData().getColumnCount();
-		    while(rs.next())
-		    {
-		        String[] row = new String[columnCount];
-		        for (int i=0; i <columnCount ; i++)
-		        {
-		           row[i] = rs.getString(i + 1);
-		        }
-		        result.add(row);
-		    }
-		    rs.close();
-		    stmt.close();
-		    connection.close();
-		} catch (ClassNotFoundException e) {
-			String[] errors = new String[] {"0","ClassNotFound"};
-			result.add(errors);
-		    // Could not find the database driver
-		} catch (SQLException e) {
-			String[] errors = new String[] {"0","SQL Exception: "+e.toString()};
-			result.add(errors);		
-			}
+
+//		    Connection connection = DriverManager.getConnection("jdbc:sqlite:"+DataStoreFile.DATA_FILE_NAME);
+//		    Statement stmt = connection.createStatement();
+//		    ResultSet rs = stmt.executeQuery("SELECT * FROM SubstitutionTable WHERE type='"+type+"'");
+//		    int columnCount = rs.getMetaData().getColumnCount();
+//		    while(rs.next())
+//		    {
+//		        String[] row = new String[columnCount];
+//		        for (int i=0; i <columnCount ; i++)
+//		        {
+//		           row[i] = rs.getString(i + 1);
+//		        }
+//		        result.add(row);
+//		    }
+
 		return result;
 	}
 	/**
@@ -167,24 +139,13 @@ public class SynonymManagerImpl extends RemoteServiceServlet implements SynonymM
 			result.add("Error reading DB");
 			return result;
 		}
-		try{
-			String driverName = "org.sqlite.JDBC";
-		    Class.forName(driverName);
-		    Connection connection = DriverManager.getConnection("jdbc:sqlite:"+DataStoreFile.DATA_FILE_NAME);
-		    Statement stmt = connection.createStatement();
-		    connection.setAutoCommit(true);
-		    stmt.executeUpdate("DELETE FROM SubstitutionTable WHERE pkey ='"+primaryKey+"';");
-		    result.add("1");
-		    stmt.close();
-		    connection.close();
-		} catch (ClassNotFoundException e) {
-			result.add("0");
-			result.add("ClassNotFound");
-		    // Could not find the database driver
-		} catch (SQLException e) {
-			result.add("0");
-			result.add("SQL Exception: "+e.toString());
-		}
+
+//		    Connection connection = DriverManager.getConnection("jdbc:sqlite:"+DataStoreFile.DATA_FILE_NAME);
+//		    Statement stmt = connection.createStatement();
+//		    stmt.executeUpdate("DELETE FROM SubstitutionTable WHERE pkey ='"+primaryKey+"';");
+//		    result.add("1");
+
+
 		return result;
 	}
 

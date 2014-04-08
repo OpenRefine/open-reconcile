@@ -3,11 +3,6 @@ package com.googlecode.openreconcile.server;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -47,22 +42,7 @@ public class ConfigDBImpl extends RemoteServiceServlet implements ConfigDB{
 	 */
 	private ArrayList<String> executeSQL(DatabaseData inputs){
 		ArrayList<String> result = new ArrayList<String>();
-		Connection connection = null;
-		String driverName=inputs.getDriver();
-	    try {
-				Class.forName(driverName);
-			} catch (ClassNotFoundException e1) {
-				result.add("0");
-				result.add("Driver Class not found exception" +e1.toString());
-			}
-		    String username = inputs.username;
-		    String password = inputs.password;
-		    
-		    try{
-			    String url = inputs.getConnectionURL();
-			    // Connect to the particular database in question
-			    connection = DriverManager.getConnection(url, username, password);
-			    connection.setAutoCommit(false);
+
 			    String sqlStatement = null;
 			    result.add("1");
 			    // If the table name is empty, the table name is
@@ -74,45 +54,36 @@ public class ConfigDBImpl extends RemoteServiceServlet implements ConfigDB{
 			    }else{
 			    	sqlStatement = inputs.getColumnNamesQuery();
 			    }
-			    Statement stmt = connection.createStatement();
-			    ResultSet rs = stmt.executeQuery(sqlStatement);
+//			    Statement stmt = connection.createStatement();
+//			    ResultSet rs = stmt.executeQuery(sqlStatement);
 			    if(inputs.tablename.isEmpty()){
-				    while (rs.next()) {
-				    	String nextTerm;
-				    	// I need to find a way to make this more
-				    	// dynamic
-				    	if (inputs.source.equals(DatabaseData.getOptions()[0])){
-				    		nextTerm = rs.getString("owner")+"."+rs.getString("table_name");
-				    	}else if (inputs.source.equals(DatabaseData.getOptions()[2])){
-				    		nextTerm = inputs.name+"."+rs.getString(1);
-				    	}else{
-				    		nextTerm = rs.getString("table_name");
-				    	}
-				    	result.add(nextTerm);
-				    }
+//				    while (rs.next()) {
+//				    	String nextTerm;
+//				    	// I need to find a way to make this more
+//				    	// dynamic
+//				    	if (inputs.source.equals(DatabaseData.getOptions()[0])){
+//				    		nextTerm = rs.getString("owner")+"."+rs.getString("table_name");
+//				    	}else if (inputs.source.equals(DatabaseData.getOptions()[2])){
+//				    		nextTerm = inputs.name+"."+rs.getString(1);
+//				    	}else{
+//				    		nextTerm = rs.getString("table_name");
+//				    	}
+//				    	result.add(nextTerm);
+//				    }
 			    }else{
 			    	// Ditto, it seems with that it's hard to get away
 			    	// from the hardcoding of particular names
-			    	while (rs.next()) {
-			    		String nextTerm;
-				    	if (inputs.source.equals(DatabaseData.getOptions()[0])){
-				    		nextTerm = inputs.tablename+"."+ rs.getString("column_name");
-				    	}else{
-				    		nextTerm = rs.getString("column_name");
-				    	}
-				    	result.add(nextTerm);
-				    }
+//			    	while (rs.next()) {
+//			    		String nextTerm;
+//				    	if (inputs.source.equals(DatabaseData.getOptions()[0])){
+//				    		nextTerm = inputs.tablename+"."+ rs.getString("column_name");
+//				    	}else{
+//				    		nextTerm = rs.getString("column_name");
+//				    	}
+//				    	result.add(nextTerm);
+//				    }
 			    }
-			    rs.close();
-			    stmt.close();
-			    connection.close();			   
-			// catch and return any errors found
-			}catch (SQLException e) {
-				result.add("0");
-				result.add("SQL Exception:"+e.toString());
-				return (result);
-		    }
-			 
+
 		 return result;
 	}
 
@@ -171,56 +142,24 @@ public class ConfigDBImpl extends RemoteServiceServlet implements ConfigDB{
 		// Passing back the SQLException is the best way to 
 		// show the user what exactly is wrong, as it tends to be 
 		// pretty descriptive
-		try {
-			Class.forName(inputs.getDriver());	
-		    String username = inputs.username;
-		    String password = inputs.password;
-		    String url = inputs.getConnectionURL();
-		    Connection connection = DriverManager.getConnection(url, username, password);
-		    connection.setAutoCommit(false);
+
 		    String sqlStatement = inputs.getVocabQuery();
-		    Statement stmt = connection.createStatement();
-		    // This is going to be unused, but it's necessary to execute the Query. 
-			ResultSet rs = stmt.executeQuery(sqlStatement);
-		    rs.close();
-		    stmt.close();
-		    connection.close();
-		} catch (ClassNotFoundException e) {
-			result.add("0");
-			result.add("ClassNotFound:"+e.toString());
-			return (result);
-		    // Could not find the database driver
-		} catch (SQLException e) {
-			result.add("0");
-			result.add("SQL Exception: "+e.toString());
-			return (result);
-		    // Could not connect to the database
-		}
+//		    Statement stmt = connection.createStatement();
+//		    // This is going to be unused, but it's necessary to execute the Query. 
+//			ResultSet rs = stmt.executeQuery(sqlStatement);
+
 		String addStat = "insert into DatabaseTable ( "+inputs.getColumnList() + 
 				") values (" + inputs.getValuesList() +");";
-	    try{
-			String driverName = "org.sqlite.JDBC";
-		    Class.forName(driverName);
-		    Connection connection = DriverManager.getConnection("jdbc:sqlite:"+DataStoreFile.DATA_FILE_NAME);
-		    Statement stmt = connection.createStatement();
+
 		    // If the table doesn't exist, create it.
 		    String sqlstat = "create table if not exists DatabaseTable (pkey INTEGER PRIMARY KEY, "+
 		    inputs.getColumnNameList() + ");";
-		    connection.setAutoCommit(true);
-		    stmt.executeUpdate(sqlstat);
-		    stmt.execute(addStat);
+//		    connection.setAutoCommit(true);
+//		    stmt.executeUpdate(sqlstat);
+//		    stmt.execute(addStat);
 		    result.add("1");
 		    result.add("Entry Added");
-		    stmt.close();
-		    connection.close();
-		} catch (ClassNotFoundException e) {
-			result.add("0");
-			result.add("ClassNotFound");
-		    // Could not find the database driver
-		} catch (SQLException e) {
-			result.add("0");
-			result.add("SQL Exception: "+e.toString()+ " on sql statement "+addStat+ " please note that capitalization matters");
-		}
+
 		return result;
 	}
 	/**
@@ -238,33 +177,19 @@ public class ConfigDBImpl extends RemoteServiceServlet implements ConfigDB{
 			result= null;
 			return result;
 		}
-	    try{
-			String driverName = "org.sqlite.JDBC";
-		    Class.forName(driverName);
-		    Connection connection = DriverManager.getConnection("jdbc:sqlite:"+DataStoreFile.DATA_FILE_NAME);
-		    Statement stmt = connection.createStatement();
-		    ResultSet rs = stmt.executeQuery("SELECT * FROM DatabaseTable");
-		    int columnCount = rs.getMetaData().getColumnCount();
-		    while(rs.next())
-		    {
-		        String[] row = new String[columnCount];
-		        for (int i=0; i <columnCount ; i++)
-		        {
-		           row[i] = rs.getString(i + 1);
-		        }
-		        result.add(row);
-		    }
-		    rs.close();
-		    stmt.close();
-		    connection.close();
-		} catch (ClassNotFoundException e) {
-			String[] errors = new String[] {"0","ClassNotFound"};
-			result.add(errors);
-		    // Could not find the database driver
-		} catch (SQLException e) {
-			String[] errors = new String[] {"0","SQL Exception: "+e.toString()};
-			result.add(errors);		
-			}
+		
+//		    ResultSet rs = stmt.executeQuery("SELECT * FROM DatabaseTable");
+//		    int columnCount = rs.getMetaData().getColumnCount();
+//		    while(rs.next())
+//		    {
+//		        String[] row = new String[columnCount];
+//		        for (int i=0; i <columnCount ; i++)
+//		        {
+//		           row[i] = rs.getString(i + 1);
+//		        }
+//		        result.add(row);
+//		    }
+
 		return result;
 	}
 	/**
@@ -286,24 +211,10 @@ public class ConfigDBImpl extends RemoteServiceServlet implements ConfigDB{
 			result.add("Error reading DB");
 			return result;
 		}
-		try{
-			String driverName = "org.sqlite.JDBC";
-		    Class.forName(driverName);
-		    Connection connection = DriverManager.getConnection("jdbc:sqlite:"+DataStoreFile.DATA_FILE_NAME);
-		    Statement stmt = connection.createStatement();
-		    connection.setAutoCommit(true);
-		    stmt.executeUpdate("DELETE FROM DatabaseTable WHERE pkey ='"+primaryKey+"';");
-		    result.add("1");
-		    stmt.close();
-		    connection.close();
-		} catch (ClassNotFoundException e) {
-			result.add("0");
-			result.add("ClassNotFound");
-		    // Could not find the database driver
-		} catch (SQLException e) {
-			result.add("0");
-			result.add("SQL Exception: "+e.toString());
-		}
+
+//		    stmt.executeUpdate("DELETE FROM DatabaseTable WHERE pkey ='"+primaryKey+"';");
+//		    result.add("1");
+
 		return result;
 	}
 	/**
@@ -316,25 +227,19 @@ public class ConfigDBImpl extends RemoteServiceServlet implements ConfigDB{
 	 */
 	public DatabaseData getDBData(String primaryKey){
 		DatabaseData thisDatabase = new DatabaseData();
-		try{
-		String driverName = "org.sqlite.JDBC";
-	    Class.forName(driverName);
-	    Connection connection = DriverManager.getConnection("jdbc:sqlite:"+DataStoreFile.DATA_FILE_NAME);
-	    Statement stmt = connection.createStatement();
-	    ResultSet rs = stmt.executeQuery("SELECT "+  thisDatabase.getColumnList() +" FROM DatabaseTable WHERE pkey ='"+ primaryKey +"'");
-	    int columnCount = rs.getMetaData().getColumnCount();
+
+//	    ResultSet rs = stmt.executeQuery("SELECT "+  thisDatabase.getColumnList() +" FROM DatabaseTable WHERE pkey ='"+ primaryKey +"'");
+//	    int columnCount = rs.getMetaData().getColumnCount();
 	    String row[] = null;
-	    while(rs.next())
-	    {
-	        row = new String[columnCount];
-	        for (int i=0; i <columnCount ; i++)
-	        {
-	           row[i] = rs.getString(i + 1);
-	        }
-	    }
-	    rs.close();
-	    stmt.close();
-	    connection.close();
+//	    while(rs.next())
+//	    {
+//	        row = new String[columnCount];
+//	        for (int i=0; i <columnCount ; i++)
+//	        {
+//	           row[i] = rs.getString(i + 1);
+//	        }
+//	    }
+
 	    boolean cap=false;
 	    boolean pun = false;
 	    if(row!=null && row.length>1){
@@ -344,11 +249,7 @@ public class ConfigDBImpl extends RemoteServiceServlet implements ConfigDB{
 		    	pun = true;
 		   thisDatabase = new DatabaseData(row[0], row[3], row[2], row[1], row[4], row[5], row[6], row[7], row[8], cap, pun);		
 	    }
-	    } catch (ClassNotFoundException e) {
-	    	thisDatabase = null;
-		} catch (SQLException e) {
-			thisDatabase = null;
-		}
+
 	    return thisDatabase;
 	}
 	/**
@@ -366,32 +267,16 @@ public class ConfigDBImpl extends RemoteServiceServlet implements ConfigDB{
 	    DatabaseData myData = getDBData(primaryKey);
 	    ArrayList<String> result = new ArrayList<String>();
 		if(myData != null && myData.source!= null){
-			try {
-				Class.forName(myData.getDriver());	
-			    String username = myData.username;
-			    String password = myData.password;
-			    String url = myData.getConnectionURL();
-			    Connection connection = DriverManager.getConnection(url, username, password);
-			    connection.setAutoCommit(false);
-			    String sqlStatement = myData.getVocabQuery();
-			    Statement stmt = connection.createStatement();
-			    ResultSet rs = stmt.executeQuery(sqlStatement);
-			    result.add("1");
-			    result.add(myData.vocabid);
-			    while (rs.next() && result.size() < 13) {
-			    	result.add(rs.getString("VOCABCOL"));
-		    	}
-			    rs.close();
-			    stmt.close();
-			    connection.close();
-			} catch (ClassNotFoundException e) {
-				result.add("0");
-				result.add("ClassNotFound:"+e.toString());
-			    // Could not find the database driver
-			} catch (SQLException e) {
-				result.add("0");
-				result.add("vocab db SQL Exception: "+e.toString());
-			}
+
+		    String sqlStatement = myData.getVocabQuery();
+//		    Statement stmt = connection.createStatement();
+//		    ResultSet rs = stmt.executeQuery(sqlStatement);
+//		    result.add("1");
+//		    result.add(myData.vocabid);
+//		    while (rs.next() && result.size() < 13) {
+//		        result.add(rs.getString("VOCABCOL"));
+//		    }
+
 		}else{
 			result.add("0");
 			result.add("error fetching database information");

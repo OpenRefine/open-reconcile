@@ -1,30 +1,23 @@
 package com.googlecode.openreconcile.server;
 
-import com.google.gson.*;
-
-// IO objects used in this servlet
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-
-// SQL objects used in this servlet
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-// Data structures used in this servlet
 import java.util.ArrayList;
 
-// Servlet objects used in this servlet
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-// Other objects used in this servlet
 import org.apache.commons.lang.StringUtils;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+// IO objects used in this servlet
+// Data structures used in this servlet
+// Servlet objects used in this servlet
+// Other objects used in this servlet
 
 public final class ReconcileServlet extends HttpServlet{
 	/**
@@ -121,41 +114,31 @@ public final class ReconcileServlet extends HttpServlet{
 			MetaData md = new MetaData(name,lib);
 			return md;
 		}
-	    try{
-			String driverName = "org.sqlite.JDBC";
-		    Class.forName(driverName);
-		    Connection connection = DriverManager.getConnection("jdbc:sqlite:"+DataStoreFile.DATA_FILE_NAME);
-		    Statement stmt = connection.createStatement();
-		    ResultSet rs = stmt.executeQuery("SELECT vocabID FROM DatabaseTable");
-		    int columnCount = rs.getMetaData().getColumnCount();
-		    ArrayList<String> dbResults = new ArrayList<String>();
-		    while(rs.next())
-		    {
-		    	// this is necessary to get all of the results.
-		        String id = null;
-		        for (int i=0; i <columnCount ; i++)
-		        {
-		           id = rs.getString(i + 1);
-		        }
-		        dbResults.add(id);
-		    }
+
+//		    Connection connection = DriverManager.getConnection("jdbc:sqlite:"+DataStoreFile.DATA_FILE_NAME);
+//		    Statement stmt = connection.createStatement();
+//		    ResultSet rs = stmt.executeQuery("SELECT vocabID FROM DatabaseTable");
+//		    int columnCount = rs.getMetaData().getColumnCount();
+//		    ArrayList<String> dbResults = new ArrayList<String>();
+//		    while(rs.next())
+//		    {
+//		    	// this is necessary to get all of the results.
+//		        String id = null;
+//		        for (int i=0; i <columnCount ; i++)
+//		        {
+//		           id = rs.getString(i + 1);
+//		        }
+//		        dbResults.add(id);
+//		    }
 		    // the libraries are going to have VocabName and VocabID as identical.
 		    // this is for ease of use, and better integration with Google Refine
 		    // as Google Refine only displays the VocabID, and it may be confusing
 		    // if the does not see the name they entered in, but only an ID
-		    for(int i = 0; i < dbResults.size(); i++){
-		    	lib.add(new Library (dbResults.get(i), dbResults.get(i)));
-		    }
-		    rs.close();
-		    stmt.close();
-		    connection.close();
-		} catch (ClassNotFoundException e) {
-			// Could not find the database driver
-			// this error has nowhere to go
-		} catch (SQLException e) {
-			// SQL Exception
-			// this error has nowhere to go
-		}		
+//		    for(int i = 0; i < dbResults.size(); i++){
+//		    	lib.add(new Library (dbResults.get(i), dbResults.get(i)));
+//		    }
+
+	
 		
 		MetaData md = new MetaData(name,lib);
 		return md;

@@ -1,11 +1,5 @@
 package com.googlecode.openreconcile.server;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -31,26 +25,19 @@ public class DataManager {
 	DataManager(String queryType){
 		String[] row = null;
 	    Boolean cap= false, pun= false;
-		try{
-			myData = new DatabaseData();
-			String driverName = "org.sqlite.JDBC";
-		    Class.forName(driverName);
-		    Connection connection = DriverManager.getConnection("jdbc:sqlite:"+DataStoreFile.DATA_FILE_NAME);
-		    Statement stmt = connection.createStatement();
-		    // pull out data to create DatabaseData object
-		    ResultSet rs = stmt.executeQuery("SELECT "+  myData.getColumnList() +" FROM DatabaseTable WHERE vocabid ='"+ queryType +"'");
-		    int columnCount = rs.getMetaData().getColumnCount();
-		    while(rs.next())
-		    {
-		        row = new String[columnCount];
-		        for (int i=0; i <columnCount ; i++)
-		        {
-		           row[i] = rs.getString(i + 1);
-		        }
-		    }
-		    rs.close();
-		    stmt.close();
-		    connection.close();
+
+//		    // pull out data to create DatabaseData object
+//		    ResultSet rs = stmt.executeQuery("SELECT "+  myData.getColumnList() +" FROM DatabaseTable WHERE vocabid ='"+ queryType +"'");
+//		    int columnCount = rs.getMetaData().getColumnCount();
+//		    while(rs.next())
+//		    {
+//		        row = new String[columnCount];
+//		        for (int i=0; i <columnCount ; i++)
+//		        {
+//		           row[i] = rs.getString(i + 1);
+//		        }
+//		    }
+
 		    if(row!=null && row.length>1){
 			    if (row[9].equals("true"))
 			    	cap = true;
@@ -59,11 +46,7 @@ public class DataManager {
 			    myData = new DatabaseData(row[0], row[3], row[2], row[1], row[4], row[5], row[6], row[7], row[8], cap, pun);
 
 		    }
-		} catch (ClassNotFoundException e) {
-		    // Could not find the database driver
-		} catch (SQLException e) {
-			// Something wrong with the query
-		}
+
 	    vocab = new ArrayList<String>();
 	    // get the vocab and the synonym map  for the type
 		if(row != null && row[0] != null && row[10]!=null){
@@ -78,42 +61,30 @@ public class DataManager {
 	**/		
 	private void getSynonyms(String queryType){
 		subMap = new HashMap<String,String>();
-		try{
-			String driverName = "org.sqlite.JDBC";
-		    Class.forName(driverName);
-		    Connection connection = DriverManager.getConnection("jdbc:sqlite:"+DataStoreFile.DATA_FILE_NAME);
-		    Statement stmt = connection.createStatement();
-		    ResultSet rs = stmt.executeQuery("SELECT fromterm AS FROMTERM, toterm AS TOTERM FROM SubstitutionTable WHERE type ='"+ queryType +"'");
-		    while(rs.next())
-		    {
-		    	// if the terms are both punctuation sensitive
-		    	// and case sensitive, don't change anything from
-		    	// the term, if it's only punctuation sensitive, 
-		    	// convert everything to lower case. If it's only
-		    	// case sensitive, take out all punctuation
-		    	// if it's not sensitive to anything, take out all 
-		    	// non alphanumeric characters and convert to lower
-		    	// case
-		    	String fromterm = rs.getString("FROMTERM");
-		    	String toterm = rs.getString("TOTERM");
-		    	subMap.put(fromterm, toterm);
-		    	if (punctSensitive()){
-		    		subMap.put(fromterm.toLowerCase(), toterm);
-		    	}else if (capsSensitive()){
-		    		subMap.put(fromterm.replaceAll("[\\W_]", ""), toterm);
-		    	}else{
-		    		subMap.put(fromterm.replaceAll("[\\W_]", "").toLowerCase(), toterm);
-		    	}
-		    }
-		    rs.close();
-		    stmt.close();
-		    connection.close();
-		    
-		} catch (ClassNotFoundException e) {
-		    // Could not find the database driver
-		} catch (SQLException e) {
-			// Something wrong with the query
-		}
+
+//		    ResultSet rs = stmt.executeQuery("SELECT fromterm AS FROMTERM, toterm AS TOTERM FROM SubstitutionTable WHERE type ='"+ queryType +"'");
+//		    while(rs.next())
+//		    {
+//		    	// if the terms are both punctuation sensitive
+//		    	// and case sensitive, don't change anything from
+//		    	// the term, if it's only punctuation sensitive, 
+//		    	// convert everything to lower case. If it's only
+//		    	// case sensitive, take out all punctuation
+//		    	// if it's not sensitive to anything, take out all 
+//		    	// non alphanumeric characters and convert to lower
+//		    	// case
+//		    	String fromterm = rs.getString("FROMTERM");
+//		    	String toterm = rs.getString("TOTERM");
+//		    	subMap.put(fromterm, toterm);
+//		    	if (punctSensitive()){
+//		    		subMap.put(fromterm.toLowerCase(), toterm);
+//		    	}else if (capsSensitive()){
+//		    		subMap.put(fromterm.replaceAll("[\\W_]", ""), toterm);
+//		    	}else{
+//		    		subMap.put(fromterm.replaceAll("[\\W_]", "").toLowerCase(), toterm);
+//		    	}
+//		    }
+
 	}
 	
 	/**
@@ -121,32 +92,16 @@ public class DataManager {
 	 *  
 	**/	
 	private void getData(){
-		if (myData.source!=null){
-			try {
-				Class.forName(myData.getDriver());	
-			    String username = myData.username;
-			    String password = myData.password;
-			    String url = myData.getConnectionURL();
-			    Connection connection = DriverManager.getConnection(url, username, password);
-			    connection.setAutoCommit(false);
-			    String sqlStatement = myData.getVocabQuery();
-			    Statement stmt = connection.createStatement();
-			    ResultSet rs = stmt.executeQuery(sqlStatement);
-			    while (rs.next()) {
-			    	vocab.add(rs.getString("VOCABCOL"));
-		    	}	
-			    rs.close();
-			    stmt.close();
-			    connection.close();
-			} catch (ClassNotFoundException e) {
-				ArrayList<String> result = new ArrayList<String>();
-				result.add("ClassNotFound:"+e.toString());
-			    // Could not find the database driver
-			} catch (SQLException e) {
-				ArrayList<String> result = new ArrayList<String>();
-				result.add("SQL Exception: "+e.toString());
-			}
-		}
+	    if (myData.source!=null){
+
+//	        String sqlStatement = myData.getVocabQuery();
+//	        Statement stmt = connection.createStatement();
+//	        ResultSet rs = stmt.executeQuery(sqlStatement);
+//	        while (rs.next()) {
+//	            vocab.add(rs.getString("VOCABCOL"));
+//	        }	
+
+	    }
 	}
 	/**
 	 * Returns the boolean value stored in the configuration file for sensitivity to case.

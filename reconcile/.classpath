@@ -12,8 +12,6 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-lang-2.6.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-lang3-3.0.1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gson-1.7.1.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/postgresql-9.1-901.jdbc4.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/sqlitejdbc-v056.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gwtchismes-0.9.7.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

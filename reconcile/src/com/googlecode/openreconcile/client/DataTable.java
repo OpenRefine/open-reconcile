@@ -29,8 +29,6 @@ public class DataTable extends Composite{
 	private final FlexTable ftPrint = new FlexTable();
     private final VerticalPanel vpLayout = new VerticalPanel();
 
-	private final static ConfigDBAsync configDBsvc = GWT.create(ConfigDB.class);
-    
     /**
 	 * 	This class extends Composite and creates a table to show all the information about the types collected 	                          
 	 */
