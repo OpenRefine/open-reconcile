@@ -54,14 +54,11 @@ public class AddWizard {
 		wait.setGlassEnabled(true);
 		wait.setModal(false);
 		wait.center();
-		@SuppressWarnings("rawtypes")
-		AsyncCallback addCallback = new AsyncCallback(){
+		AsyncCallback<List<String>> addCallback = new AsyncCallback<List<String>>(){
 			// if the RPC is successful... 
-	        @SuppressWarnings("static-access")
-			public void onSuccess (Object result)  
+			public void onSuccess (List<String> result)  
 	        {  
 	        	wait.hide();
-	        	@SuppressWarnings("unchecked")
 				final List<String> resultsArray = (List<String>) result;
 	        	if (resultsArray.get(0).equals("1")){
 		        	db.setModal(true);
@@ -80,7 +77,7 @@ public class AddWizard {
 		        	// box to allow the user to filter the 
 		        	// results by table owner, in case too
 		        	// many table names get returned.
-		        	if (myData.source.equals(myData.getOptions()[0])){
+		        	if (myData.source.equals(DatabaseData.getOptions()[0])){
 		        		dbVP.add(selectOwner);
 		        	}
 		        	final VerticalPanel vpTables = new VerticalPanel();
@@ -217,13 +214,11 @@ public class AddWizard {
 		wait.setModal(false);
 		wait.center();
 
-		@SuppressWarnings("rawtypes")
-		AsyncCallback callback = new AsyncCallback(){
-	        public void onSuccess (Object result)  
+		AsyncCallback<List<String>> callback = new AsyncCallback<List<String>>(){
+	        public void onSuccess (List<String> result)  
 	        {
 	    		// if the callback is successful populate the display with the column names
 	        	wait.hide();
-	        	@SuppressWarnings("unchecked")
 	        	List<String> resultsArray = (List<String>) result;
 	        	for(int k=1; k<resultsArray.size(); k++){
 	        		rbColList.add(new RadioButton(tableName.toString(), resultsArray.get(k)));        				        		
@@ -312,11 +307,9 @@ public class AddWizard {
 	 *  
 	 */
 	protected static void addData(final DatabaseData inputs) {
-		@SuppressWarnings("rawtypes")
-		AsyncCallback addCallback = new AsyncCallback(){
-	        public void onSuccess (Object result)  
+		AsyncCallback<List<String>> addCallback = new AsyncCallback<List<String>>(){
+	        public void onSuccess (List<String> result)  
 	        {
-	        	@SuppressWarnings("unchecked")
 				List<String> resultsArray = (List<String>) result;
 	        	if(resultsArray!=null && resultsArray.size()>0){
 		        	if (resultsArray.get(0).equals("1")){

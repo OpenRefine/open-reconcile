@@ -53,13 +53,11 @@ public class SynonymTable extends Composite{
 		ServiceDefTarget endpointDB = (ServiceDefTarget) svcDatabase;
 		String DBURL = GWT.getHostPageBaseURL()+"/reconcile/ConfigDB";
         endpointDB.setServiceEntryPoint(DBURL);
-        @SuppressWarnings("rawtypes")
-		AsyncCallback listCurentCallback = new AsyncCallback(){
-	        public void onSuccess (Object result)  
+        AsyncCallback<List<String[]>> listCurentCallback = new AsyncCallback<List<String[]>>(){
+	        public void onSuccess (List<String[]> result)  
 	        {
 	        	// clear out any existing current lists, so the screen doesn't
 	        	// get to be too cluttered
-	        	@SuppressWarnings({ "unchecked" })
 				final List<String[]> rMatrix = (List<String[]>) result; 
 				for( int i =0; i < rMatrix.size(); i++){
 					typeList.add(rMatrix.get(i)[9]);				
@@ -109,12 +107,10 @@ public class SynonymTable extends Composite{
         endpointSyn.setServiceEntryPoint(SynURL);
 
 
-		@SuppressWarnings("rawtypes")
-		AsyncCallback addCallback = new AsyncCallback(){
-	        public void onSuccess (Object result)  
+		AsyncCallback<List<String[]>> addCallback = new AsyncCallback<List<String[]>>(){
+	        public void onSuccess (List<String[]> result)  
 	        {
-	        	@SuppressWarnings("unchecked")
-				final
+	        	final
 				List<String[]> rMatrix = (List<String[]>) result;
 				
 				String[] headers = {"Remove", "From", "To", "VocabID/Type"};
@@ -235,13 +231,11 @@ public class SynonymTable extends Composite{
 	 * @param primaryKey
 	 */
 	private void deleteRow(String primaryKey){
-		@SuppressWarnings("rawtypes")
 		// This function requires a RPC
-		AsyncCallback addCallback = new AsyncCallback(){
-	        public void onSuccess (Object result)  
+		AsyncCallback<List<String>> addCallback = new AsyncCallback<List<String>>(){
+	        public void onSuccess (List<String> result)  
 	        {
-	        	@SuppressWarnings("unchecked")
-				List<String> resultsArray = (List<String>) result;
+	        	List<String> resultsArray = (List<String>) result;
 	        	if(resultsArray==null || resultsArray.size()==0){
 	        		Window.alert("There was an unknown problem");
 	        	}else if (resultsArray.get(0).equals("0") && resultsArray.size()==2){
@@ -266,13 +260,11 @@ public class SynonymTable extends Composite{
 	 */
 	private void addThis(String vocabID, String fromText, String toText){
 		SynonymData myData = new SynonymData(fromText, toText, vocabID);
-		@SuppressWarnings("rawtypes")
 		// This function requires a RPC
-		AsyncCallback addCallback = new AsyncCallback(){
-	        public void onSuccess (Object result)  
+		AsyncCallback<List<String>> addCallback = new AsyncCallback<List<String>>(){
+	        public void onSuccess (List<String> result)  
 	        {
-	        	@SuppressWarnings("unchecked")
-				List<String> resultsArray = (List<String>) result;
+	        	List<String> resultsArray = (List<String>) result;
 	        	if(resultsArray==null || resultsArray.size()==0){
 	        		Window.alert("There was an unknown problem");
 	        	}else if (resultsArray.get(0).equals("0") && resultsArray.size()==2){

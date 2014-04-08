@@ -45,13 +45,11 @@ public class DataTable extends Composite{
 		// this references a style from Reconcile.css to keep the font
 		// small enough and add a border
 		initWidget(vpLayout);
-        @SuppressWarnings("rawtypes")
-		AsyncCallback listCurentCallback = new AsyncCallback(){
-	        public void onSuccess (Object result)  
+        AsyncCallback<List<String[]>> listCurentCallback = new AsyncCallback<List<String[]>>(){
+	        public void onSuccess (List<String[]> result)  
 	        {
 	        	// clear out any existing current lists, so the screen doesn't
 	        	// get to be too cluttered
-	        	@SuppressWarnings({ "unchecked" })
 				final List<String[]> rMatrix = (List<String[]>) result; 
 				final Label lblTable = new Label("All Current Configured Vocabulary Sources");
 				final FlexTable ftPrint = new FlexTable();
@@ -212,13 +210,11 @@ public class DataTable extends Composite{
 	 *  
 	 */
 	private void deleteDataRow(String primaryKey) {
-		@SuppressWarnings("rawtypes")
 		// This function requires a RPC
-		AsyncCallback addCallback = new AsyncCallback(){
-	        public void onSuccess (Object result)  
+		AsyncCallback<List<String>> addCallback = new AsyncCallback<List<String>>(){
+	        public void onSuccess (List<String> result)  
 	        {
-	        	@SuppressWarnings("unchecked")
-				List<String> resultsArray = (List<String>) result;
+	        	List<String> resultsArray = (List<String>) result;
 	        	if(resultsArray==null || resultsArray.size()==0){
 	        		Window.alert("There was an unknown problem");
 	        	}else if (resultsArray.get(0).equals("0") && resultsArray.size()==2){
@@ -251,13 +247,11 @@ public class DataTable extends Composite{
 			final VerticalPanel vpShow = new VerticalPanel();
 			add(vpShow);
 			vpShow.setWidth("250px");
-			@SuppressWarnings("rawtypes")
 			// This function requires a RPC
-			AsyncCallback addCallback = new AsyncCallback(){
-		        public void onSuccess (Object result)  
+			AsyncCallback<List<String>> addCallback = new AsyncCallback<List<String>>(){
+		        public void onSuccess (List<String> result)  
 		        {
-		        	@SuppressWarnings("unchecked")
-					List<String> resultsArray = (List<String>) result;
+		        	List<String> resultsArray = (List<String>) result;
 		        	if(resultsArray==null || resultsArray.size()==0){
 		        		Window.alert("There was an unknown problem");
 		        	}else if (resultsArray.get(0).equals("0") && resultsArray.size()==2){
