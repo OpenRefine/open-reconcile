@@ -1,5 +1,6 @@
 package com.googlecode.openreconcile.common;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 
@@ -34,18 +35,15 @@ public interface ConfigDB {
     public List<String> getColumns(DatabaseData inputs);
 
     /**
-     * Gets a list of accessible tables in the database.
+     * Add an entry to the database.
      * 
      * @param inputs
      *            A DatabaseData object containing information to be added to
      *            the configuration file.
      * 
-     * @return An List of Strings. The first entry of the List is a "1" or a
-     *         "0", a "1" signifies a successful execution. If there are any
-     *         errors the List will contain two entries, a "0" and the exception
-     *         caught.
+     * @return true if succesful
      */
-    public List<String> addEntry(DatabaseData inputs);
+    public boolean addEntry(DatabaseData inputs);
 
     /**
      * Returns all data in the configuration file
@@ -66,9 +64,10 @@ public interface ConfigDB {
      *         be either a "1" signaling a successful execution, or a "0"
      *         indicating an exception was thrown. The second entry will be the
      *         exception, if any, that was thrown.
+     * @throws FileNotFoundException 
      * 
      */
-    public List<String> deleteThisEntry(String primaryKey);
+    public void deleteThisEntry(String primaryKey) throws FileNotFoundException;
 
     /**
      * Gets a "preview" of vocab terms from database entry.

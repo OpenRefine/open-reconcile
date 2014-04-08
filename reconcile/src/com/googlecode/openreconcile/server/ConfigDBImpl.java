@@ -2,7 +2,7 @@ package com.googlecode.openreconcile.server;
 
 
 import java.io.File;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -23,98 +23,37 @@ public class ConfigDBImpl implements ConfigDB{
 
 
     /**
-     * Executes the SQL queries based on what is in the DatabaseData object
-     * handed to it if there is a table name specified, it will search for
-     * column names of that table, if there is no table name, it will search for
-     * table names.
-     * 
-     * @param inputs
-     *            A DatabaseData object containing connection information about
-     *            a database
-     * 
-     @return An List of String objects with a "1" or a "0" in the first value,
-     *         signifying if the query was executed corrected, if it wasn't, the
-     *         second String in the list will be the exception thrown. If
-     *         everything went well the List will contain a "1" and then all of
-     *         the desired names from the database.
-     * 
-     */
-    private List<String> executeSQL(DatabaseData inputs){
-        List<String> result = new ArrayList<String>();
-
-        String sqlStatement = null;
-        result.add("1");
-        // If the table name is empty, the table name is
-        // the focus of the search. There should never
-        // be a case where column names are desired but
-        // a table name isn't assigned yet.
-        if (inputs.tablename.isEmpty()){
-            sqlStatement = inputs.getTableNamesQuery();
-        }else{
-            sqlStatement = inputs.getColumnNamesQuery();
-        }
-//        Statement stmt = connection.createStatement();
-//        ResultSet rs = stmt.executeQuery(sqlStatement);
-        if(inputs.tablename.isEmpty()){
-//            while (rs.next()) {
-//                String nextTerm;
-//                // I need to find a way to make this more
-//                // dynamic
-//                if (inputs.source.equals(DatabaseData.getOptions()[0])){
-//                    nextTerm = rs.getString("owner")+"."+rs.getString("table_name");
-//                }else if (inputs.source.equals(DatabaseData.getOptions()[2])){
-//                    nextTerm = inputs.name+"."+rs.getString(1);
-//                }else{
-//                    nextTerm = rs.getString("table_name");
-//                }
-//                result.add(nextTerm);
-//            }
-        }else{
-            // Ditto, it seems with that it's hard to get away
-            // from the hardcoding of particular names
-//            while (rs.next()) {
-//                String nextTerm;
-//                if (inputs.source.equals(DatabaseData.getOptions()[0])){
-//                    nextTerm = inputs.tablename+"."+ rs.getString("column_name");
-//                }else{
-//                    nextTerm = rs.getString("column_name");
-//                }
-//                result.add(nextTerm);
-//            }
-        }
-
-        return result;
-    }
-
-    /**
-     * Calls the executeSQL function, see executeSQL
+     * Return a list of table names.
      * 
      * @param inputs
      *            A DatabaseData object containing connection information
      * 
-     @return The results from executeSQL, see above
+     * @return the list of table names
      * 
      */   
     @Override
     public List<String> getTables(DatabaseData inputs){
-        return executeSQL(inputs);
+        List<String>  result = new ArrayList<String>();
+        return result;
     }
 
     /**
-     * Calls the executeSQL function, see executeSQL
+     * Return a list of column names for the given table.
      * 
-	@param inputs A DatabaseData object containing connection information
-     *                      	                          
-	@return The results from executeSQL, see above
-     *  
-     */	 
+     * @param inputs
+     *            A DatabaseData object containing connection information
+     * 
+     * @return the list of column names.
+     * 
+     */
     @Override
-    public List<String> getColumns(DatabaseData inputs) {
-        return executeSQL(inputs);
+    public List<String>  getColumns(DatabaseData inputs) {
+        List<String>  result = new ArrayList<String>();
+        return result;
     }
 
     /**
-     * Gets a list of accessible tables in the database.
+     * Add an entry to the database.
      * 
      * @param inputs
      *            A DatabaseData object containing information to be added to
@@ -125,50 +64,15 @@ public class ConfigDBImpl implements ConfigDB{
      *         caught.
      */
     @Override
-    public List<String> addEntry(DatabaseData inputs) {
-        File file = new File(ReconcileServlet.DATA_FILE_NAME);
-        List<String> result = new ArrayList<String>();
-        // If the file doesn't exist, create it.
-        if (!file.exists()){
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                result.add("0");
-                result.add(e.toString());
-                return result;
-            }
-        }
-        // Here the entry is tested to insure it's functional. If it throws an error
-        // there's no point in trying to add it to the DB
-        // Passing back the SQLException is the best way to 
-        // show the user what exactly is wrong, as it tends to be 
-        // pretty descriptive
-
-        String sqlStatement = inputs.getVocabQuery();
-//        Statement stmt = connection.createStatement();
-        // This is going to be unused, but it's necessary to execute the Query. 
-//        ResultSet rs = stmt.executeQuery(sqlStatement);
-
-        String addStat = "insert into DatabaseTable ( "+inputs.getColumnList() + 
-                ") values (" + inputs.getValuesList() +");";
-
-        // If the table doesn't exist, create it.
-        String sqlstat = "create table if not exists DatabaseTable (pkey INTEGER PRIMARY KEY, "+
-                inputs.getColumnNameList() + ");";
-//        connection.setAutoCommit(true);
-//        stmt.executeUpdate(sqlstat);
-//        stmt.execute(addStat);
-        result.add("1");
-        result.add("Entry Added");
-
-        return result;
+    public boolean addEntry(DatabaseData inputs) {
+        throw new UnsupportedOperationException("Add not supported");
     }
+
     /**
-     * Returns all data in the configuration file 
-     *     	                          
-	@return An List<String[]> of the data, each String[] contains all the 
-     * entries for one entry in the file.
-     *  
+     * Returns all data in the configuration file
+     * 
+     * @return An List<String[]> of the data, each String[] contains all the
+     *         entries for one entry in the file.
      */
     @Override
     public List<String[]> getCurrent() {
@@ -200,27 +104,20 @@ public class ConfigDBImpl implements ConfigDB{
      * @param primaryKey
      *            This is the primary key for the entry which is to be deleted.
      * 
-     @return An List<String> that will have 1 or 2 entries. The first entry will
-     *         be either a "1" signaling a successful execution, or a "0"
-     *         indicating an exception was thrown. The second entry will be the
-     *         exception, if any, that was thrown.
+     * @throws FileNotFoundException 
      * 
      */
     @Override
-    public List<String> deleteThisEntry(String primaryKey){
+    public void deleteThisEntry(String primaryKey) throws FileNotFoundException{
         File file = new File(ReconcileServlet.DATA_FILE_NAME);
-        List<String> result = new ArrayList<String>();
         if (!file.exists()){
-            result.add("0");
-            result.add("Error reading DB");
-            return result;
+            throw new FileNotFoundException("Error reading database " + file);
         }
 
 //        stmt.executeUpdate("DELETE FROM DatabaseTable WHERE pkey ='"+primaryKey+"';");
 //        result.add("1");
-
-        return result;
     }
+    
     /**
      * Returns the DatabaseData object for a type
      * 
@@ -290,8 +187,7 @@ public class ConfigDBImpl implements ConfigDB{
 //            }
 
         }else{
-            result.add("0");
-            result.add("error fetching database information");
+            throw new RuntimeException("error fetching database information");
         }
         return result;
     }
