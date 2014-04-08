@@ -434,31 +434,25 @@ public class ReconcileMatching {
 
     /**
      * A function that users Collections.sort function to sort the Result
-     * objects by their score. It has to reverse the sort, as the
-     * Collections.sort function returns the results in ascending order and we
-     * want the results in descending.
+     * objects by their descending score.
      * 
      * @param sortThis
      *            A List of Result objects not sorted.
      * 
-     @return A sorted List of Result objects
+     * @return A sorted List of Result objects
      * 
      **/
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    private static List<Result> sortByScore(List<Result> sortThis){
+    private static List<Result> sortByScore(List<Result> sortThis) {
         List<Result> sorted = sortThis;
-        Collections.sort(sorted, new Comparator(){
+        Collections.sort(sorted, new Comparator<Result>() {
 
-            public int compare(Object o1, Object o2){
-                Result r1 = (Result) o1;
-                Result r2 = (Result) o2;
-
+            public int compare(Result r1, Result r2) {
                 Double Score1 = new Double(r1.getScore());
                 Double Score2 = new Double(r2.getScore());
-                return Score1.compareTo(Score2);
+                // Invert comparison for descending sort
+                return Score2.compareTo(Score1);
             }
         });
-        Collections.reverse(sorted);
 
         return sorted;
     }
