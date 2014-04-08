@@ -3,6 +3,7 @@ package com.googlecode.openreconcile.server;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.googlecode.openreconcile.client.SynonymManager;
@@ -28,9 +29,9 @@ public class SynonymManagerImpl extends RemoteServiceServlet implements SynonymM
 	 * the ArrayList will contain two entries, a "0" and the exception caught.
 	 *  
 	 */
-	public ArrayList<String> addEntry(SynonymData inputs) {
+	public List<String> addEntry(SynonymData inputs) {
 		File file = new File(DataStoreFile.DATA_FILE_NAME);
-		ArrayList<String> result = new ArrayList<String>();
+		List<String> result = new ArrayList<String>();
 		// If the file doesn't exist, create it.
 		if (!file.exists()){
 			try {
@@ -51,7 +52,7 @@ public class SynonymManagerImpl extends RemoteServiceServlet implements SynonymM
 				termExists = true;
 			}
 		}
-		ArrayList<String[]> existingterms = getCurrent(inputs.getDBtype());
+		List<String[]> existingterms = getCurrent(inputs.getDBtype());
 		boolean fromExists = false;
 		for (int i= 0; i< existingterms.size(); i++){
 			if (existingterms.get(i)[1].equals(inputs.getFrom())){
@@ -91,14 +92,14 @@ public class SynonymManagerImpl extends RemoteServiceServlet implements SynonymM
 	/**
 	 * Returns all data in the configuration file 
 	 *     	                          
-	@return An ArrayList<String[]> of the data, each String[] contains all the 
+	@return An List<String[]> of the data, each String[] contains all the 
 	 * entries for one entry in the file.
 	 *  
 	 */
 	@Override
-	public ArrayList<String[]> getCurrent(String type) {
+	public List<String[]> getCurrent(String type) {
 		File file = new File(DataStoreFile.DATA_FILE_NAME);
-		ArrayList<String[]> result = new ArrayList<String[]>();
+		List<String[]> result = new ArrayList<String[]>();
 		if (!file.exists()){
 			result= null;
 			return result;
@@ -125,15 +126,15 @@ public class SynonymManagerImpl extends RemoteServiceServlet implements SynonymM
 	 * 
 	@param primaryKey This is the primary key for the entry which is to be deleted.
 	 *                    	                          
-	@return An ArrayList<String> that will have 1 or 2 entries. The first entry will be either a "1" signaling a
+	@return An List<String> that will have 1 or 2 entries. The first entry will be either a "1" signaling a
 	 * successful execution, or a "0" indicating an exception was thrown. The second entry will be the exception, if any, that
 	 * was thrown.
 	 *  
 	 */
 	@Override
-	public ArrayList<String> deleteEntry(String primaryKey){
+	public List<String> deleteEntry(String primaryKey){
 		File file = new File(DataStoreFile.DATA_FILE_NAME);
-		ArrayList<String> result = new ArrayList<String>();
+		List<String> result = new ArrayList<String>();
 		if (!file.exists()){
 			result.add("0");
 			result.add("Error reading DB");

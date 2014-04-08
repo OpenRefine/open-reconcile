@@ -1,6 +1,6 @@
 package com.googlecode.openreconcile.client;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -50,7 +50,7 @@ public class DataTable extends Composite{
 	        	// clear out any existing current lists, so the screen doesn't
 	        	// get to be too cluttered
 	        	@SuppressWarnings({ "unchecked" })
-				final ArrayList<String[]> rMatrix = (ArrayList<String[]>) result; 
+				final List<String[]> rMatrix = (List<String[]>) result; 
 				final Label lblTable = new Label("All Current Configured Vocabulary Sources");
 				final FlexTable ftPrint = new FlexTable();
 				vpLayout.add(lblTable);
@@ -216,7 +216,7 @@ public class DataTable extends Composite{
 	        public void onSuccess (Object result)  
 	        {
 	        	@SuppressWarnings("unchecked")
-				ArrayList<String> resultsArray = (ArrayList<String>) result;
+				List<String> resultsArray = (List<String>) result;
 	        	if(resultsArray==null || resultsArray.size()==0){
 	        		Window.alert("There was an unknown problem");
 	        	}else if (resultsArray.get(0).equals("0") && resultsArray.size()==2){
@@ -255,7 +255,7 @@ public class DataTable extends Composite{
 		        public void onSuccess (Object result)  
 		        {
 		        	@SuppressWarnings("unchecked")
-					ArrayList<String> resultsArray = (ArrayList<String>) result;
+					List<String> resultsArray = (List<String>) result;
 		        	if(resultsArray==null || resultsArray.size()==0){
 		        		Window.alert("There was an unknown problem");
 		        	}else if (resultsArray.get(0).equals("0") && resultsArray.size()==2){

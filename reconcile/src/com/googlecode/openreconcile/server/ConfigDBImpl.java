@@ -4,20 +4,17 @@ package com.googlecode.openreconcile.server;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.googlecode.openreconcile.client.ConfigDB;
 import com.googlecode.openreconcile.client.datatypes.DatabaseData;
 
-// uncomment for logging.
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
-
 
 public class ConfigDBImpl extends RemoteServiceServlet implements ConfigDB{
-// Uncomment this for logging
-//	private static String nameOfLogger = ReconcileMatching.class.getName();
-//	private static Logger myLogger = Logger.getLogger(nameOfLogger); 
+	private static String nameOfLogger = ReconcileMatching.class.getName();
+	private static Logger myLogger = Logger.getLogger(nameOfLogger); 
 	/**
 	 *  Important note: the database name is saved in the servicenumber field
 	 */
@@ -34,14 +31,14 @@ public class ConfigDBImpl extends RemoteServiceServlet implements ConfigDB{
 	 * 
 	@param inputs A DatabaseData object containing connection information about a database
 	 *                     	                          
-	@return An ArrayList of String objects with a "1" or a "0" in the first value, signifying 
+	@return An List of String objects with a "1" or a "0" in the first value, signifying 
 	 * if the query was executed corrected, if it wasn't, the second String in the list will be the
-	 * exception thrown. If everything went well the ArrayList will contain a "1" and then all of the
+	 * exception thrown. If everything went well the List will contain a "1" and then all of the
 	 * desired names from the database. 
 	 *  
 	 */
-	private ArrayList<String> executeSQL(DatabaseData inputs){
-		ArrayList<String> result = new ArrayList<String>();
+	private List<String> executeSQL(DatabaseData inputs){
+		List<String> result = new ArrayList<String>();
 
 			    String sqlStatement = null;
 			    result.add("1");
@@ -96,7 +93,7 @@ public class ConfigDBImpl extends RemoteServiceServlet implements ConfigDB{
 	 *  
 	 */	    
 	@Override
-	public ArrayList<String> getTables(DatabaseData inputs){
+	public List<String> getTables(DatabaseData inputs){
 	    return executeSQL(inputs);
 	}
 	
@@ -109,7 +106,7 @@ public class ConfigDBImpl extends RemoteServiceServlet implements ConfigDB{
 	 *  
 	 */	 
 	@Override
-	public ArrayList<String> getColumns(DatabaseData inputs) {
+	public List<String> getColumns(DatabaseData inputs) {
 	    return executeSQL(inputs);
 	}
 	
@@ -118,15 +115,15 @@ public class ConfigDBImpl extends RemoteServiceServlet implements ConfigDB{
 	 * 
 	@param inputs A DatabaseData object containing information to be added to the configuration file.
 	 *                          	                          
-	@return An ArrayList of Strings. The first entry of the ArrayList is a "1" or a "0",
+	@return An List of Strings. The first entry of the List is a "1" or a "0",
 	 *  a "1" signifies a successful execution. If there are any errors 
-	 * the ArrayList will contain two entries, a "0" and the exception caught.
+	 * the List will contain two entries, a "0" and the exception caught.
 	 *  
 	 */
 	@Override
-	public ArrayList<String> addEntry(DatabaseData inputs) {
+	public List<String> addEntry(DatabaseData inputs) {
 		File file = new File(DataStoreFile.DATA_FILE_NAME);
-		ArrayList<String> result = new ArrayList<String>();
+		List<String> result = new ArrayList<String>();
 		// If the file doesn't exist, create it.
 		if (!file.exists()){
 			try {
@@ -165,14 +162,14 @@ public class ConfigDBImpl extends RemoteServiceServlet implements ConfigDB{
 	/**
 	 * Returns all data in the configuration file 
 	 *     	                          
-	@return An ArrayList<String[]> of the data, each String[] contains all the 
+	@return An List<String[]> of the data, each String[] contains all the 
 	 * entries for one entry in the file.
 	 *  
 	 */
 	@Override
-	public ArrayList<String[]> getCurrent() {
+	public List<String[]> getCurrent() {
 		File file = new File(DataStoreFile.DATA_FILE_NAME);
-		ArrayList<String[]> result = new ArrayList<String[]>();
+		List<String[]> result = new ArrayList<String[]>();
 		if (!file.exists()){
 			result= null;
 			return result;
@@ -197,15 +194,15 @@ public class ConfigDBImpl extends RemoteServiceServlet implements ConfigDB{
 	 * 
 	@param primaryKey This is the primary key for the entry which is to be deleted.
 	 *                    	                          
-	@return An ArrayList<String> that will have 1 or 2 entries. The first entry will be either a "1" signaling a
+	@return An List<String> that will have 1 or 2 entries. The first entry will be either a "1" signaling a
 	 * successful execution, or a "0" indicating an exception was thrown. The second entry will be the exception, if any, that
 	 * was thrown.
 	 *  
 	 */
 	@Override
-	public ArrayList<String> deleteThisEntry(String primaryKey){
+	public List<String> deleteThisEntry(String primaryKey){
 		File file = new File(DataStoreFile.DATA_FILE_NAME);
-		ArrayList<String> result = new ArrayList<String>();
+		List<String> result = new ArrayList<String>();
 		if (!file.exists()){
 			result.add("0");
 			result.add("Error reading DB");
@@ -259,15 +256,15 @@ public class ConfigDBImpl extends RemoteServiceServlet implements ConfigDB{
 	 * 
 	@param primaryKey This is the primary key for the entry to fetch results for.
 	 *                    	                          
-	@return An ArrayList<String> that will have 2 or 13 entries. The first entry will be either a "1" signaling a
+	@return An List<String> that will have 2 or 13 entries. The first entry will be either a "1" signaling a
 	 * successful execution, or a "0" indicating an exception was thrown. The second entry will be the exception, if any, that
 	 * was thrown. the rest of the entries, assuming it worked, will be terms of the type specified.
 	 *  
 	 */
 	@Override
-	public ArrayList<String> getPreview(String primaryKey) {
+	public List<String> getPreview(String primaryKey) {
 	    DatabaseData myData = getDBData(primaryKey);
-	    ArrayList<String> result = new ArrayList<String>();
+	    List<String> result = new ArrayList<String>();
 		if(myData != null && myData.source!= null){
 
 		    String sqlStatement = myData.getVocabQuery();

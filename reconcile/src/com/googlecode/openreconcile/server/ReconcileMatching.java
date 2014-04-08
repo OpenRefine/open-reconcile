@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,7 +17,7 @@ public class ReconcileMatching {
 	
 	public DataManager  mDataManager = null;
 	
-	public ArrayList<Result> results = new ArrayList<Result>();
+	public List<Result> results = new ArrayList<Result>();
 	
 	public Query thisQuery = new Query();
 	
@@ -39,10 +40,10 @@ public class ReconcileMatching {
 	@param myVocab aVocabManager object which contains information about the 
 	 * vocabulary against which the query term will be compared.  
 	 *     
-	@return An ArrayList of Result objects, which will be parsed into a JSON response
+	@return A List of Result objects, which will be parsed into a JSON response
 	 *  
 	 */
-	public static ArrayList<Result> findMatches(Query query, DataManager myVocab){
+	public static List<Result> findMatches(Query query, DataManager myVocab){
 
 		//Uncomment this for logging in this class	
 //		myLogger.setLevel(Level.INFO); 
@@ -91,8 +92,8 @@ public class ReconcileMatching {
 
 		String type = query.getType();
 
-		// This ArrayList is the results that are going to be returned. 
-		ArrayList<Result> results = getDirectMatches(myVocab, querystr, uncleaned, type);
+		// This List is the results that are going to be returned. 
+		List<Result> results = getDirectMatches(myVocab, querystr, uncleaned, type);
 		
 		// If there's a perfect match return it.
 		if (results.size() == 1 && results.get(0).match){
@@ -150,17 +151,17 @@ public class ReconcileMatching {
 	@param originalQuerystr Because the query may be modified, it's useful to get original query term
 	@param type The vocab type. 
 	 *         	                          
-	@return An ArrayList of Result objects that are closer than the maxScore allowable.
+	@return A List of Result objects that are closer than the maxScore allowable.
 	 *  
 	**/	
-	private static ArrayList<Result> getDirectMatches(DataManager myVocab, String querystr, 
+	private static List<Result> getDirectMatches(DataManager myVocab, String querystr, 
 			String originalQuerystr, String type) {
-		// perfectMatch is an ArrayList for a Result where the match
+		// perfectMatch is A List for a Result where the match
 		// is to be considered an exact match.
-		ArrayList<Result> perfectMatch = new ArrayList<Result>();
+		List<Result> perfectMatch = new ArrayList<Result>();
 		
 		// imperfectResults are for all non-100% matches
-		ArrayList<Result> imperfectResults = new ArrayList<Result>();
+		List<Result> imperfectResults = new ArrayList<Result>();
 		// Loop through the whole vocabulary list, quit if there's a perfect match
 		for (int i = 0; i<myVocab.vocab.size() && perfectMatch.size()<1; i++){
 			String vocabTerm = myVocab.vocab.get(i).trim();
@@ -227,10 +228,10 @@ public class ReconcileMatching {
 	@param  query A Query object (for the query term) 
 	@param  myVocab a VocabManager object (for the vocabulary) 
 	 *         	                          
-	@return An ArrayList of Result objects that are closer than the maxScore allowable.
+	@return A List of Result objects that are closer than the maxScore allowable.
 	 *  
 	**/	 
-	private static ArrayList<Result> distanceMatching(Query query, DataManager myVocab) {
+	private static List<Result> distanceMatching(Query query, DataManager myVocab) {
 		String queryterm = query.getQuery();
 		int maxScore;
 		if (queryterm.length()<9) {
@@ -238,7 +239,7 @@ public class ReconcileMatching {
         } else {
             maxScore = queryterm.length()-(queryterm.length()/THRESHOLD_LEV);
         }
-		ArrayList<Result> fuzzyResults = new ArrayList<Result>();
+		List<Result> fuzzyResults = new ArrayList<Result>();
 		for (int i = 0; i < myVocab.vocab.size(); i++){
 			String vocabterm = myVocab.vocab.get(i).trim();
 			int distance = levenshteinDistance(vocabterm, queryterm);
@@ -318,16 +319,16 @@ public class ReconcileMatching {
 	 * of results that will be displayed. This allows for response queries to be
 	 * only as long as will be used.
 	 * 
-	@param  pruneThis An ArrayList of Result objects.  
+	@param  pruneThis A List of Result objects.  
 	 * @param limit  The limit in the query request. It is hardcoded in Google Refine as 3.
 	 *  
 	                          	                          
-	@return An ArrayList of Result objects with a max number of entries.
+	@return A List of Result objects with a max number of entries.
 	 *  
 	**/	
-	private static ArrayList<Result> pruneResults(ArrayList<Result> pruneThis, int limit){
-		ArrayList<Result> sortednodups = sortByScore(pruneThis);
-		ArrayList<Result> pruned = new ArrayList<Result>();
+	private static List<Result> pruneResults(List<Result> pruneThis, int limit){
+		List<Result> sortednodups = sortByScore(pruneThis);
+		List<Result> pruned = new ArrayList<Result>();
 		for (int i = 0; i<limit && i < pruneThis.size(); i++){
 			pruned.add(sortednodups.get(i));
 		}
@@ -336,21 +337,21 @@ public class ReconcileMatching {
 	
 	
 	/**
-	 * A function that checks the ArrayList of result objects for duplicates. Because
+	 * A function that checks the List of result objects for duplicates. Because
 	 * of the overlap between some of the methods, a positive result may be found
 	 * for the same vocabulary term twice. This function deletes all but one entry for
 	 * each term and it reports the highest score
 	 * 
-	@param  toDeDup An ArrayList of Result objects.  
+	@param  toDeDup A List of Result objects.  
 	 *              
-	@return An ArrayList of Result objects without any duplicates
+	@return A List of Result objects without any duplicates
 	 *  
 	**/	
-	private static ArrayList<Result> removeDuplicates(ArrayList<Result> toDeDup){
+	private static List<Result> removeDuplicates(List<Result> toDeDup){
 		// This is a hash map that keeps track of the result term
 		// and the index at which it is found.
 		Map<String, Integer> hashm = new HashMap<String, Integer>();
-		ArrayList<Result> noDups = new ArrayList<Result>();
+		List<Result> noDups = new ArrayList<Result>();
 		for(int i = 0; i < toDeDup.size(); i++){
 			// Random bug where scores > 100 sometimes
 			if (toDeDup.get(i).getScore()>100){
@@ -362,14 +363,14 @@ public class ReconcileMatching {
 			}else{
 				// If the result term is already in the hash map
 				// Compare the scores between the current term and the
-				// one already in the hashmap. Add the highest.
+				// one already in the Map. Add the highest.
 				if (toDeDup.get(i).getScore() > toDeDup.get(hashm.get(toDeDup.get(i).getName().trim())).getScore()) {
                     hashm.put(toDeDup.get(i).getName().trim(), i);
                 }
 			}
 		}
 		// Go through the hash map and add all of the index's to the 
-		// ArrayList of results to return
+		// List of results to return
 		for (String key: hashm.keySet()){
 			noDups.add(toDeDup.get(hashm.get(key)));
 		}
@@ -384,18 +385,18 @@ public class ReconcileMatching {
 	@param  query A Query 
 	@param myVocab A VocabManager
 	 *  	                          	                          
-	@return An ArrayList of Result objects from the search.
+	@return A List of Result objects from the search.
 	 *  
 	**/	
 	
-	private static ArrayList<Result> bagOfWords(Query query, DataManager myVocab) {
+	private static List<Result> bagOfWords(Query query, DataManager myVocab) {
 		String queryname = query.getQuery();
 		// split on space and punctuation
 		String[] termList = queryname.split(" ");
-		ArrayList<Result> bagResults = new ArrayList<Result>();
+		List<Result> bagResults = new ArrayList<Result>();
 		for (String element : termList) {
 			Query newQuery = new Query(element, query.getLimit(), query.getType(), query.getTypeStrict(), query.properties()) ;
-			ArrayList<Result> tempResults = new ArrayList<Result>(findMatches(newQuery, myVocab));
+			List<Result> tempResults = new ArrayList<Result>(findMatches(newQuery, myVocab));
 			for(int j=0; j<tempResults.size(); j++){
 
 				tempResults.get(j).setMatch(false);
@@ -417,14 +418,14 @@ public class ReconcileMatching {
 	 * the Collections.sort function returns the results in ascending order
 	 * and we want the results in descending. 
 	 * 
-	@param sortThis An ArrayList of Result objects not sorted.  
+	@param sortThis A List of Result objects not sorted.  
 	 *                          	                          
-	@return A sorted ArrayList of Result objects
+	@return A sorted List of Result objects
 	 *  
 	**/
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private static ArrayList<Result> sortByScore(ArrayList<Result> sortThis){
-		ArrayList<Result> sorted = sortThis;
+	private static List<Result> sortByScore(List<Result> sortThis){
+		List<Result> sorted = sortThis;
 		Collections.sort(sorted, new Comparator(){
 			
 			public int compare(Object o1, Object o2){

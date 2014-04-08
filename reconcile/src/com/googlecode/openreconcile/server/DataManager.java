@@ -2,6 +2,8 @@ package com.googlecode.openreconcile.server;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.googlecode.openreconcile.client.datatypes.DatabaseData;
 import com.googlecode.openreconcile.client.datatypes.SynonymData;
@@ -13,9 +15,9 @@ public class DataManager {
 	
 	public SynonymData mySynonyms;
 	// holds the collection of terms from the data source
-	public ArrayList<String> vocab;
+	public List<String> vocab;
 	// holds a map of the terms that are synonyms for the type
-	public HashMap<String, String> subMap;
+	public Map<String, String> subMap;
 	/**
 	 * Constructor, it accesses the configuration file and populates the DatabaseData object based on that, and calls a function to populate the vocab list.
 	 * 
@@ -57,7 +59,7 @@ public class DataManager {
 		}
 	}
 	/**
-	 * Populates the HashMap of Strings that is the substitution table. It's called only at the end of the constructor and is private.
+	 * Populates the Map of Strings that is the substitution table. It's called only at the end of the constructor and is private.
 	 * 
 	 *  
 	**/		
@@ -90,7 +92,7 @@ public class DataManager {
 	}
 	
 	/**
-	 * Populates the ArrayList of Strings that is the vocabulary. It's called only at the end of the constructor and is private.
+	 * Populates the List of Strings that is the vocabulary. It's called only at the end of the constructor and is private.
 	 *  
 	**/	
 	private void getData(){

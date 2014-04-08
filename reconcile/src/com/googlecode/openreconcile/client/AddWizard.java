@@ -2,6 +2,7 @@ package com.googlecode.openreconcile.client;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.google.code.p.gwtchismes.client.GWTCWait;
@@ -59,7 +60,7 @@ public class AddWizard {
 	        {  
 	        	wait.hide();
 	        	@SuppressWarnings("unchecked")
-				final ArrayList<String> resultsArray = (ArrayList<String>) result;
+				final List<String> resultsArray = (List<String>) result;
 	        	if (resultsArray.get(0).equals("1")){
 		        	db.setModal(true);
 		        	db.setGlassEnabled(true);	        	
@@ -83,7 +84,7 @@ public class AddWizard {
 		        	final VerticalPanel vpTables = new VerticalPanel();
 		        	dbVP.add(vpTables);
 	        		HorizontalPanel hp = new HorizontalPanel();
-	        		final ArrayList<RadioButton> rbTabList = new ArrayList<RadioButton>();
+	        		final List<RadioButton> rbTabList = new ArrayList<RadioButton>();
 	        		Set<String> owners = new HashSet<String>(); 
 	        		//Create RadioButtons for each of the table names returned
 	        		// and store them in a List. Also, keep track of the 
@@ -196,7 +197,7 @@ public class AddWizard {
 	 *   
 	 */
 	private static void finishWizard(final DatabaseData data){
-		final ArrayList<RadioButton> rbColList = new ArrayList<RadioButton>();
+		final List<RadioButton> rbColList = new ArrayList<RadioButton>();
 		final VerticalPanel dbVP = new VerticalPanel();
 		// clear all of the table-name widgets/data from the dialog box
 		db.clear();
@@ -221,7 +222,7 @@ public class AddWizard {
 	    		// if the callback is successful populate the display with the column names
 	        	wait.hide();
 	        	@SuppressWarnings("unchecked")
-	        	ArrayList<String> resultsArray = (ArrayList<String>) result;
+	        	List<String> resultsArray = (List<String>) result;
 	        	for(int k=1; k<resultsArray.size(); k++){
 	        		rbColList.add(new RadioButton(tableName.toString(), resultsArray.get(k)));        				        		
 	        		colSelectVP.add(rbColList.get(rbColList.size()-1));
@@ -314,7 +315,7 @@ public class AddWizard {
 	        public void onSuccess (Object result)  
 	        {
 	        	@SuppressWarnings("unchecked")
-				ArrayList<String> resultsArray = (ArrayList<String>) result;
+				List<String> resultsArray = (List<String>) result;
 	        	if(resultsArray!=null && resultsArray.size()>0){
 		        	if (resultsArray.get(0).equals("1")){
 		        		Window.alert("Entry added successfully.");

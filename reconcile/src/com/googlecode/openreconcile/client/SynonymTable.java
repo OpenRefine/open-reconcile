@@ -1,6 +1,8 @@
 package com.googlecode.openreconcile.client;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -43,7 +45,7 @@ public class SynonymTable extends Composite{
 		hpTypeSelect.add(lbTypes);
 		hpTypeSelect.setSpacing(20);
 		vpSynonyms.add(hpTypeSelect);
-		final ArrayList<String> typeList= new ArrayList<String>();
+		final List<String> typeList= new ArrayList<String>();
 		ServiceDefTarget endpointDB = (ServiceDefTarget) svcDatabase;
 		String DBURL = GWT.getHostPageBaseURL()+"/reconcile/ConfigDB";
         endpointDB.setServiceEntryPoint(DBURL);
@@ -54,7 +56,7 @@ public class SynonymTable extends Composite{
 	        	// clear out any existing current lists, so the screen doesn't
 	        	// get to be too cluttered
 	        	@SuppressWarnings({ "unchecked" })
-				final ArrayList<String[]> rMatrix = (ArrayList<String[]>) result; 
+				final List<String[]> rMatrix = (List<String[]>) result; 
 				for( int i =0; i < rMatrix.size(); i++){
 					typeList.add(rMatrix.get(i)[9]);				
 				}
@@ -109,7 +111,7 @@ public class SynonymTable extends Composite{
 	        {
 	        	@SuppressWarnings("unchecked")
 				final
-				ArrayList<String[]> rMatrix = (ArrayList<String[]>) result;
+				List<String[]> rMatrix = (List<String[]>) result;
 				
 				String[] headers = {"Remove", "From", "To", "VocabID/Type"};
 				for (int i = 0; i< headers.length; i++){
@@ -235,7 +237,7 @@ public class SynonymTable extends Composite{
 	        public void onSuccess (Object result)  
 	        {
 	        	@SuppressWarnings("unchecked")
-				ArrayList<String> resultsArray = (ArrayList<String>) result;
+				List<String> resultsArray = (List<String>) result;
 	        	if(resultsArray==null || resultsArray.size()==0){
 	        		Window.alert("There was an unknown problem");
 	        	}else if (resultsArray.get(0).equals("0") && resultsArray.size()==2){
@@ -266,7 +268,7 @@ public class SynonymTable extends Composite{
 	        public void onSuccess (Object result)  
 	        {
 	        	@SuppressWarnings("unchecked")
-				ArrayList<String> resultsArray = (ArrayList<String>) result;
+				List<String> resultsArray = (List<String>) result;
 	        	if(resultsArray==null || resultsArray.size()==0){
 	        		Window.alert("There was an unknown problem");
 	        	}else if (resultsArray.get(0).equals("0") && resultsArray.size()==2){
